@@ -39,11 +39,11 @@
 }
 
 .circle {
-  width: 50px; /* Tamaño del círculo */
-  height: 50px; /* Tamaño del círculo */
-  border: 2px solid #000; /* Borde negro */
-  border-radius: 50%; /* Hacer que el div sea un círculo */
-  margin-left: 10px; /* Espacio entre círculos */
+  width: 50px;
+  height: 50px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  margin-left: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,7 +51,7 @@
 }
 
 .icon {
-  max-width: 80%; /* Tamaño máximo del icono */
-  max-height: 80%; /* Tamaño máximo del icono */
+  max-width: 80%;
+  max-height: 80%;
 }
 </style>
