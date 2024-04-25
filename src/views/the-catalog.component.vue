@@ -5,7 +5,6 @@
 
   </div>
   <div class="catalog-container">
-    <!-- División izquierda con categorías -->
     <div class="categories">
       <h2>Categorías</h2>
       <div><span>Joyería artesanal</span></div>
@@ -18,10 +17,8 @@
       <div><span>Juguetes</span></div>
       <div><span>Decoración del hogar</span></div>
       <div><span>Productos gastronómicos artesanales</span></div>
-      <!-- Aquí puedes agregar tus categorías -->
     </div>
 
-    <!-- División derecha con productos -->
     <div class="products">
       <ProductCatalog></ProductCatalog>
       <ProductCatalog></ProductCatalog>
@@ -47,7 +44,7 @@ export default {
 <style scoped>
 .catalog-container {
   display: flex;
-  min-height: 100vh; /* Establece la altura mínima como 100% del viewport */
+  min-height: 100vh;
 
 }
 
@@ -55,9 +52,9 @@ export default {
   width: 400px;
   padding: 20px;
   background-color: #E0EDFF;
-  min-height: 100%; /* Ajusta la altura al 100% del contenedor principal */
+  min-height: 100%;
   border-right: 1px solid black;
-  overflow-y: auto; /* Añade un desplazamiento vertical si el contenido excede la altura */
+  overflow-y: auto;
 
 }
 
@@ -67,10 +64,10 @@ export default {
 }
 
 .products {
-  flex-grow: 1; /* El contenido ocupa todo el espacio restante */
+  flex-grow: 1;
 }
 .categories div {
   margin-left: 20px;
-  margin-bottom: 10px; /* Ajusta el valor según la separación deseada */
+  margin-bottom: 10px;
 }
 </style>

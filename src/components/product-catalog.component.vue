@@ -19,7 +19,7 @@ export default {
 <style scoped>
 .product {
   display: flex;
-  position: relative; /* Asegúrate de que .product tenga una posición relativa */
+  position: relative;
   margin-bottom: 20px;
   border-bottom: 1px solid #9b9b9b;
 }
@@ -47,9 +47,9 @@ export default {
 }
 
 .product-price {
-  position: absolute; /* Hace que el precio sea absoluto */
-  bottom: 10px; /* Posiciona el precio en la parte inferior */
-  right: 10px; /* Posiciona el precio a la derecha */
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
   padding: 10px;
   border: 1px solid #000;
   border-radius: 10px;

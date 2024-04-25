@@ -1,12 +1,7 @@
 <template>
   <div class="search-bar">
-    <!-- Palabra "Publicar" -->
     <span class="publish" @mouseover="underline" @mouseleave="removeUnderline">Publicar</span>
-
-    <!-- Input de búsqueda -->
     <input type="text" class="search-input" placeholder="Buscar..." />
-
-    <!-- Icono de lupa -->
     <img src="@/images/searchIcon.png" alt="Search" class="search-icon" />
   </div>
 </template>
@@ -31,20 +26,20 @@ export default {
   height: 80px;
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Alinea los elementos a la derecha */
+  justify-content: flex-end;
   padding: 0 10px;
 }
 
 .publish {
   color: white;
   cursor: pointer;
-  margin-right: 45px; /* Espacio entre "Publicar" y el input */
+  margin-right: 45px;
   font-size: 1.5em;
 }
 
 .search-input {
-  width: 20%; /* Tamaño del input al 20% del contenedor */
-  height: 80%; /* Altura del input al 80% del contenedor */
+  width: 20%;
+  height: 80%;
   border: none;
   background-color: #ffffff;
   color: #A8A8A8;
