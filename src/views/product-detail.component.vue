@@ -4,8 +4,13 @@
     <SearchBar />
 
     <div class="product-detail-content">
-      <div class="product-image">
-        <img src="../images/mateBurilado.png" alt="Imagen del producto">
+      <div class="additional-images">
+        <div v-for="(image, index) in images" :key="index">
+          <img v-if="image" :src="image" :alt="'Imagen adicional ' + (index + 1)" class="additional-image">
+        </div>
+      </div>
+      <div class="product-image-section">
+        <img  class="product-image" src="../images/mateBurilado.png" alt="Imagen del producto">
       </div>
       <div class="product-info">
         <div class="author-info">
@@ -27,35 +32,56 @@
           </ul>
         </div>
       </div>
+      <div class="product-info">
+        <div class="product-actions">
+          <p class="product-price">Precio: $100</p>
+          <button class="buy-button">Comprar</button>
+          <button class="customize-button">Personalizar producto</button>
+        </div>
+      </div>
     </div>
   </div>
+  <TheFooter class="footer" />
 </template>
 
 <script>
 import AppToolbar from '@/components/the-application-toolbar.component.vue'
 import SearchBar from '@/components/the-product-searching.component.vue'
+import TheFooter from '@/components/the-footer.component.vue'
 export default {
   name: 'TheProductDetail',
   components: {
+    TheFooter,
     AppToolbar,
     SearchBar,
+  },
+  data() {
+    return {
+      images: ['src/images/mate1.png','src/images/mate1.png','src/images/mate1.png']
+    }
   }
 }
 </script>
 
 <style scoped>
+.product-image{
+  width: 50%;
+  height: 90%;
+  margin-left: 20%;
+}
 .product-detail-content {
   display: flex;
   justify-content: space-between;
   padding: 20px;
 }
 
-.product-image {
+.product-image-section {
   width: 50%;
 }
 
 .product-info {
   width: 45%;
+
 }
 
 .author-info {
@@ -76,4 +102,59 @@ export default {
   width: 50px;
   margin-right: 10px;
 }
+.additional-images {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 20px;
+  margin-left:50px;
+}
+
+.additional-image {
+  width: 100px;
+  height: 120px;
+  border: 1px solid #000;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.product-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 100px;
+
+}
+.product-detail {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.footer {
+  flex-shrink: 0;
+}
+
+.buy-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border:black 1px solid;
+  cursor: pointer;
+  color: white;
+  background-color: #116BC7;
+}
+
+.customize-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border:black 1px solid;
+  cursor: pointer;
+  color: white;
+  background-color: #116BC7;
+}
+
 </style>
