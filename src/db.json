@@ -1,25 +1,48 @@
 {
-  "products": [
+  "clientes": [
     {
-      "id": 1,
-      "name": "Producto 1",
-      "description": "Descripción del producto 1...",
-      "price": 100,
-      "image": "images/product1.jpg"
+      "usuario": "DavidW",
+      "contraseña": "contraseña123",
+      "correo": "david.willams@user.com",
+      "imagen_usuario": "src/images/davidWilliams.png"
     },
     {
-      "id": 2,
-      "name": "Producto 2",
-      "description": "Descripción del producto 2...",
-      "price": 200,
-      "image": "images/product2.jpg"
+      "usuario": "LeonidasOr",
+      "contraseña": "clave456",
+      "correo": "leo.orellana@user.com",
+      "imagen_usuario": "src/images/LeoOrellana.png"
     },
     {
-      "id": 3,
-      "name": "Producto 3",
-      "description": "Descripción del producto 3...",
-      "price": 300,
-      "image": "images/product3.jpg"
+      "usuario": "CeciliaVal",
+      "contraseña": "miclave",
+      "correo": "cecilia.valenzuela@user.com",
+      "imagen_usuario": "ruta/imagen3.jpg"
+    },
+    {
+      "usuario": "JoaquinPard",
+      "contraseña": "123456",
+      "correo": "magnate456@user.com",
+      "imagen_usuario": "ruta/imagen4.jpg"
+    }
+  ],
+  "productos": [
+    {
+      "nombre": "Mate Burilado",
+      "descripcion": "Los mates burilados son frutos de mate o calabaza ornamentados de forma artesanal con una técnica llamada burilado",
+      "precio": 29.99,
+      "detalles": "Detalles adicionales sobre el producto 1",
+      "detalles del artesano": "Información del artesano sobre el producto",
+      "parametros_personalizacion": {
+        "color": ["rojo", "azul", "verde"],
+        "material": ["madera", "metal"],
+        "tamaño": 10,
+        "gravado": "Detalles de gravado para el producto 1"
+      },
+      "tamaño": 10,
+      "gravado": "Detalles de gravado para el producto 1",
+      "categoria": "Categoría 1",
+      "imagenes_detalle": ["src/images/mate1.png"],
+      "autor": "LeonidasOr"
     }
   ]
 }

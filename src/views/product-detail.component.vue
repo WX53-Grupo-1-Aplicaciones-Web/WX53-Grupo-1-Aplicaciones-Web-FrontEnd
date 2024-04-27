@@ -134,7 +134,7 @@ body {
 }
 
 .footer {
-  flex-shrink: 0;
+
 }
 
 .buy-button {
