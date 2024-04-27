@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import PrimeVue from 'primevue/config'
 import 'primevue/resources/themes/aura-light-green/theme.css'
-
+import ConfirmationService from 'primevue/confirmationservice';
 import 'primeicons/primeicons.css'
 
 import Button from 'primevue/button'
@@ -16,11 +16,11 @@ import SpeedDial from 'primevue/speeddial';
 import Dialog from 'primevue/dialog';
 import ConfirmDialog from 'primevue/confirmdialog';
 import Dropdown from 'primevue/dropdown';
-import ConfirmationService from 'primevue/confirmationservice';
-import ToastService from 'primevue/toastservice';
+
 import InputNumber from 'primevue/inputnumber';
 import Checkbox from 'primevue/checkbox';
 import Divider from 'primevue/divider';
+import ToastService from 'primevue/toastservice';
 
 import router from '@/router.js'
 
@@ -28,7 +28,8 @@ const app = createApp(App)
 
 app.use(PrimeVue)
 app.use(router)
-
+app.use(ConfirmationService)
+app.use(ToastService)
 app.component('pv-button', Button)
 app.component('pv-input-text', InputText)
 app.component('pv-card', Card)
