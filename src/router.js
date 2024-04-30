@@ -7,6 +7,7 @@ import ResetPassword from '@/views/reset-password.component.vue'
 import Parameters from '@/views/parameters.component.vue'
 import Acquisition from '@/views/acquisition.component.vue'
 import BuyProducts from './views/buy-products.component.vue'
+import PublicationProduct from './views/publication-product.vue'
 
 const routes = [
   // Coloquen los paths de sus componentes aquí
@@ -21,7 +22,7 @@ const routes = [
   { path: '/parameters', component: Parameters },
   { path: '/acquisition', component: Acquisition },
   { path: '/buyProducts', component: BuyProducts },
-  
+  { path: '/publication', component: PublicationProduct },
 
 ]
 
