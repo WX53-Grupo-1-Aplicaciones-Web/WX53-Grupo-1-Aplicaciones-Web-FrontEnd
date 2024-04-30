@@ -22,6 +22,15 @@ import Checkbox from 'primevue/checkbox';
 import Divider from 'primevue/divider';
 import ToastService from 'primevue/toastservice';
 
+import MultiSelect from 'primevue/multiselect';
+import RadioButton from 'primevue/radiobutton';
+import 'primevue/resources/primevue.min.css';
+import FileUpload from 'primevue/fileupload';
+import Message from 'primevue/message';
+import OverlayPanel from 'primevue/overlaypanel';
+import Chips from 'primevue/chips';
+
+
 import router from '@/router.js'
 
 const app = createApp(App)
@@ -42,5 +51,12 @@ app.component('pv-dropdown', Dropdown)
 app.component('pv-input-number', InputNumber)
 app.component('pv-checkbox', Checkbox)
 app.component('pv-divider', Divider)
+app.component('pv-multiselect', MultiSelect)
+app.component('pv-radio-button', RadioButton)
+app.component('pv-file-upload', FileUpload)
+app.component('pv-message', Message)
+app.component('pv-overlay-panel', OverlayPanel)
+app.component('pv-chips', Chips)
+
 
 app.mount('#app')
