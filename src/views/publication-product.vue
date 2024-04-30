@@ -54,7 +54,6 @@
 <script>
 import AppToolbar from '@/components/the-application-toolbar.component.vue'
 import {ProductApiServices} from '@/services/cliente-products-api.service.js'
-import { http } from '@/services/cliente-products-api.service.js';
 
 export default {
   name: 'TheCatalog',
