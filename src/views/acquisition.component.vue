@@ -1,4 +1,6 @@
 <template>
+
+    <AppToolbar />
   <div class="card-container">
   <pv-card class="card">
   <template #header>
@@ -34,11 +36,19 @@
   </template>
   </pv-card>
 </div>
-
+<the-footer/>
 </template>
 
 <script>
+import AppToolbar from '@/components/the-application-toolbar.component.vue'
+import TheFooter from '@/components/the-footer.component.vue'
+
+
 export default{
+  components: {
+      AppToolbar,
+    TheFooter
+  },
   data() {
       return {
           ingredient:"",

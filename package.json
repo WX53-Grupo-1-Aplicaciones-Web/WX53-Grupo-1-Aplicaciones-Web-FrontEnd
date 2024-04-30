@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
+    "axios": "^1.6.8",
     "primeicons": "^7.0.0",
     "primevue": "^3.52.0",
     "vue": "^3.4.21",
