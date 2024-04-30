@@ -1,4 +1,5 @@
 <template>
+  <div class="card-container">
   <pv-card class="card">
   <template #header>
       <img alt="user header" src="https://content.emarket.pe/common/collections/content/ed/3a/ed3aa421-2085-464d-98d9-ee37850290c8.png" />
@@ -16,7 +17,7 @@
       <div class="flex flex-column gap-3">
           <div v-for="category of categories" :key="category.key" class="flex align-items-center">
               <pv-checkbox v-model="selectedCategories" :inputId="category.key" name="category" :value="category.name" />
-              <label :for="category.key">{{ category.name }}</label>
+              <label :for="category.key">Yo, {{ category.name }}  confirmo el acuerdo</label>
           </div>
       </div>
   </div>
@@ -32,6 +33,8 @@
       </div>
   </template>
   </pv-card>
+</div>
+
 </template>
 
 <script>
@@ -42,8 +45,8 @@ export default{
           value1: 0,
           category: "",
           categories: [
-          { name: "Accounting", key: "A" },
-          { name: "Marketing", key: "M" },
+          { name: "Manuel Herrera ", key: "A" },
+          { name: "David Williams", key: "M" },
           ],    
           selectedCategories: ['Marketing']
       };
@@ -53,16 +56,21 @@ export default{
 </script>
 
 <style>
-
 .card {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-top: 20px;
-  width:100%;
-  background-color: #E0EDFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+    width:80%;
+    background-color: #E0EDFF;
+    box-sizing: border-box;
+    justify-content: center; 
 }
 
+.card-container {
+    display: flex;
+    justify-content: center; 
+}
 
 
 .card img {
