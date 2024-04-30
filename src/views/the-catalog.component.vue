@@ -21,7 +21,6 @@
 
     <div class="products">
       <ProductCatalog></ProductCatalog>
-      <ProductCatalog></ProductCatalog>
     </div>
   </div>
 </template>

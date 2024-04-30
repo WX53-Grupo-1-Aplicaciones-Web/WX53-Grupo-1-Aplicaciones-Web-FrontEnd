@@ -48,8 +48,10 @@
 import AppToolbar from '@/components/the-application-toolbar.component.vue'
 import SearchBar from '@/components/the-product-searching.component.vue'
 import TheFooter from '@/components/the-footer.component.vue'
+import { ProductCatalogService } from '@/services/product_on_catalog.service.js'
 export default {
   name: 'TheProductDetail',
+
   components: {
     TheFooter,
     AppToolbar,
@@ -57,8 +59,12 @@ export default {
   },
   data() {
     return {
-      images: ['src/images/mate1.png','src/images/mate1.png','src/images/mate1.png']
-    }
+      product: null
+    };
+  },
+  async created() {
+    const service = new ProductCatalogService();
+    this.product = await service.get(this.$route.params.id);
   }
 }
 </script>

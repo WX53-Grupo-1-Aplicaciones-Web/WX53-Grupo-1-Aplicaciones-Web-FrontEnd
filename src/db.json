@@ -27,6 +27,7 @@
     ],
     "productos": [
       {
+        "id": "prd01",
         "nombre": "Mate Burilado",
         "descripcion": "Los mates burilados son frutos de mate o calabaza ornamentados de forma artesanal con una técnica llamada burilado",
         "precio": 29.99,
@@ -41,6 +42,7 @@
         "tamaño": 10,
         "gravado": "Detalles de gravado para el producto 1",
         "categoria": "Categoría 1",
+        "imagen": "src/images/mateBurilado.png",
         "imagenes_detalle": ["src/images/mate1.png"],
         "autor": "LeonidasOr"
       }

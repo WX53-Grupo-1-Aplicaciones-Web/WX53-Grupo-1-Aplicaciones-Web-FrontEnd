@@ -1,16 +1,31 @@
 <script>
+import { ProductCatalogService } from '@/services/product_on_catalog.service.js'
 export default {
-  name: 'ProductCatalog'
+  name: 'ProductCatalog',
+  data() {
+    return {
+      products: []
+    }
+  },
+  async created() {
+    const service = new ProductCatalogService();
+    this.products = await service.getAll();
+  },
+  methods: {
+    goToProductDetail() {
+      window.location.href = 'http://localhost:5173/product_detail';
+    }
+  }
 }
 </script>
 
 <template>
-  <div class="product">
-    <img class="product-image" src="../images/mateBurilado.png" alt="Product Image">
+  <div v-for="product in products" :key="product.nombre" class="product">
+    <img class="product-image" :src="product.imagen" :alt="product.nombre">
     <div class="product-info">
-      <h2 class="product-name">Nombre del Producto</h2>
-      <p class="product-description">Descripción del producto...</p>
-      <div class="product-price">Precio: $100</div>
+      <h2 class="product-name">{{ product.nombre }}</h2>
+      <p class="product-description">{{ product.descripcion }}</p>
+      <div class="product-price" @click="goToProductDetail">Precio: ${{ product.precio }}</div>
     </div>
   </div>
 </template>
@@ -55,5 +70,6 @@ export default {
   border-radius: 10px;
   width: fit-content;
   background-color: #449AFF;
+  cursor: pointer;
 }
 </style>
