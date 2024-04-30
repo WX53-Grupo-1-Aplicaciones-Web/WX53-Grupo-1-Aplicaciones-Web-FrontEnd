@@ -30,6 +30,8 @@ import Message from 'primevue/message';
 import OverlayPanel from 'primevue/overlaypanel';
 import Chips from 'primevue/chips';
 
+import Textarea from 'primevue/textarea';
+
 
 import router from '@/router.js'
 
@@ -57,6 +59,6 @@ app.component('pv-file-upload', FileUpload)
 app.component('pv-message', Message)
 app.component('pv-overlay-panel', OverlayPanel)
 app.component('pv-chips', Chips)
-
+app.component('pv-textarea', Textarea)
 
 app.mount('#app')
