@@ -4,7 +4,8 @@
       <pv-card class="card">
         <template #header>
           <div class="edit-button-container">
-            <pv-button v-on:click="editProduct" label="Editar Imagen" class="edit-button"/>
+            <pv-button v-on:click="editProduct" label="Editar Imagen" class="edit-button"/> -->
+            <!-- <pv-file-upload mode="basic" name="demo[]" url="/api/upload" accept="image/*" :maxFileSize="1000000" @upload="onUpload" :auto="true" chooseLabel="Editar Imagen" /> -->
           </div>    
           <img alt="user header" src="https://content.emarket.pe/common/collections/content/ed/3a/ed3aa421-2085-464d-98d9-ee37850290c8.png" style="width: 300px; height: auto; margin-right: 20px;" />
           
@@ -14,7 +15,7 @@
           <div class="content-container">
             <div class="input-container">
               <label for="productName" class="input-label">Nombre del Producto</label>
-              <pv-input-text id="productName" v-model="productName" aria-describedby="productName-help" class="input-field" />
+              <pv-input-text id="productName" v-model="productName" placeholder="Ingrese el nombre del producto" aria-describedby="productName-help" class="input-field" />
             </div>
             
             <div class="input-container">
@@ -26,15 +27,20 @@
               <label for="productPrice" class="input-label">Precio del Producto (PEN)</label>
               <input type="text" id="productPrice" v-model="productPrice" @input="formatCurrency" placeholder="0.00" class="input-field" />
             </div>
+
+            <div class="input-container">
+              <label for="productDescription" class="input-label">Descripcion del Producto</label>
+              <pv-textarea v-model="productDescription" rows="5" cols="30" class="input-field" placeholder="Escriba una descripción del producto" />
+            </div>
             
             <div class="input-container">
               <label for="checkbox" class="input-label">Producto personalizable </label>
-              <pv-checkbox v-model="productOnSale" :binary="true" />
+              <pv-checkbox v-model="productPersonalizable" :binary="true" />
             </div>
           </div>
   
           <div class="publish-button-container">
-            <pv-button label="Publicar" class="publish-button" />
+            <pv-button label="Publicar" class="publish-button" @click="publishProduct" />
           </div>
         </template> 
         <template #footer>
@@ -48,6 +54,8 @@
 <script>
 import AppToolbar from '@/components/the-application-toolbar.component.vue'
 import {ProductApiServices} from '@/services/cliente-products-api.service.js'
+import { http } from '@/services/cliente-products-api.service.js';
+
 export default {
   name: 'TheCatalog',
   components: {
@@ -68,7 +76,8 @@ export default {
       confirm: null,
       toast: null,
       productPrice: '', 
-      productOnSale: false, 
+      productPersonalizable: false, 
+      productDescription: '',
     };
   },
   methods: {
@@ -90,7 +99,24 @@ export default {
     },
     onUpload() {
             this.$toast.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
-    }, 
+    },
+
+    async publishProduct() {
+    try {
+      const response = await http.post('productos', {
+        nombre: this.productName,
+        categoria: this.category,
+        precio: this.productPrice,
+        description: this.productDescription,
+        personalizable: this.productPersonalizable
+      });
+      console.log('Producto publicado:', response.data);
+      // Aquí podrías mostrar un mensaje de éxito o redirigir al usuario a otra página
+    } catch (error) {
+      console.error('Error al publicar el producto:', error);
+      // Aquí podrías mostrar un mensaje de error al usuario
+    }
+  }
   },
 
   mounted() {
@@ -182,5 +208,20 @@ export default {
 .edit-button-container {
   padding: 10px 0px;
 }
+
+.description-input {
+  width: 100%; /* Asegurando que el ancho sea del 100% */
+  height: auto; /* Cambiado a "auto" para que el alto se ajuste dinámicamente */
+  min-height: 100px; /* Altura mínima del cuadro de texto */
+  max-height: 200px; /* Altura máxima del cuadro de texto (ajústalo según tus necesidades) */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow-y: scroll; /* Utilizamos scroll para que aparezca una barra de desplazamiento vertical si es necesario */
+  resize: vertical; /* Permite que el usuario redimensione verticalmente el cuadro de texto */
+  word-wrap: break-word; /* Rompe las palabras largas y las lleva a la siguiente línea */
+  white-space: pre-wrap; /* Mantiene el formato del texto y los saltos de línea */
+}
+
 </style>
 
