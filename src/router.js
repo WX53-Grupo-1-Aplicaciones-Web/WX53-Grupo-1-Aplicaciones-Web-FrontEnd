@@ -8,6 +8,8 @@ import Parameters from '@/views/parameters.component.vue'
 import Acquisition from '@/views/acquisition.component.vue'
 import BuyProducts from './views/buy-products.component.vue'
 import PublicationProduct from './views/publication-product.vue'
+import TheProfileInformation from '@/views/profile-information.component.vue'
+import TheProfileEdit from '@/views/profile-edit.component.vue'
 
 const routes = [
   // Coloquen los paths de sus componentes aquí
@@ -23,7 +25,8 @@ const routes = [
   { path: '/acquisition', component: Acquisition },
   { path: '/buyProducts', component: BuyProducts },
   { path: '/publication', component: PublicationProduct },
-
+  { path: '/profile_information', component: TheProfileInformation },
+  { path: '/profile_edit', component: TheProfileEdit },
 ]
 
 const router = createRouter({
