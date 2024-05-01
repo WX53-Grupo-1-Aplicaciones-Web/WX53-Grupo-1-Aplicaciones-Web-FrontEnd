@@ -1,54 +1,9 @@
-<template>
-  <div class="product-detail">
-    <AppToolbar />
-    <SearchBar />
-
-    <div class="product-detail-content">
-      <div class="additional-images">
-        <div v-for="(image, index) in images" :key="index">
-          <img v-if="image" :src="image" :alt="'Imagen adicional ' + (index + 1)" class="additional-image">
-        </div>
-      </div>
-      <div class="product-image-section">
-        <img  class="product-image" src="../images/mateBurilado.png" alt="Imagen del producto">
-      </div>
-      <div class="product-info">
-        <div class="author-info">
-          <h2>Hecho por <span class="author-name">Leonidas Orellana  </span></h2>
-          <div class="author-details">
-            <img class="author-image" src="../images/craftermanProfile.png" alt="Imagen del autor">
-          </div>
-        </div>
-        <p class="author-description">Leonidas Orellana de Ayacucho nos ofrece su colección de estatuillas inspirados en los héroes y precursores de la independencia del Perú.</p>
-        <div class="product-details">
-          <h3>Detalles del producto</h3>
-          <ul>
-            <li>Estilo: Escultura tradicional cuzqueña</li>
-            <li>Material: Piedra de andesita</li>
-            <li>Técnica: Talla a mano</li>
-            <li>Dimensiones: 30cm de altura, 20cm de ancho y 15cm de profundidad</li>
-            <li>Coloración: Tonalidades tierra y toques dorados</li>
-            <li>Características destacadas:</li>
-          </ul>
-        </div>
-      </div>
-      <div class="product-info">
-        <div class="product-actions">
-          <p class="product-price">Precio: $100</p>
-          <button class="buy-button">Comprar</button>
-          <button class="customize-button">Personalizar producto</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <TheFooter class="footer" />
-</template>
-
 <script>
 import AppToolbar from '@/components/the-application-toolbar.component.vue'
 import SearchBar from '@/components/the-product-searching.component.vue'
 import TheFooter from '@/components/the-footer.component.vue'
 import { ProductCatalogService } from '@/services/product_on_catalog.service.js'
+
 export default {
   name: 'TheProductDetail',
 
@@ -62,12 +17,63 @@ export default {
       product: null
     };
   },
-  async created() {
-    const service = new ProductCatalogService();
-    this.product = await service.get(this.$route.params.id);
+  methods: {
+    async getProductDetail(id) {
+      const service = new ProductCatalogService();
+      this.product = await service.getProductDetail(id);
+    }
+  },
+  created() {
+    this.getProductDetail(this.$route.params.id);
   }
 }
 </script>
+
+<template>
+  <div class="product-detail">
+    <AppToolbar />
+    <SearchBar />
+
+    <div class="product-detail-content">
+      <div class="additional-images">
+        <div v-for="(image, index) in images" :key="index">
+          <img v-if="image" :src="image" :alt="'Imagen adicional ' + (index + 1)" class="additional-image">
+        </div>
+      </div>
+      <div class="product-image-section">
+        <img class="product-image" :src="'/'+product.imagen" alt="Imagen del producto">
+      </div>
+      <div class="product-info">
+        <div class="author-info">
+          <h2>Hecho por <span class="author-name">{{product.autor}}  </span></h2>
+          <div class="author-details">
+            <img class="author-image" src="../images/craftermanProfile.png" alt="Imagen del autor">
+          </div>
+        </div>
+        <p class="author-description">{{product.detalles_del_artesano}}</p>
+        <div class="product-details">
+          <h3>Detalles del producto</h3>
+          <ul>
+            <li>{{ product.caracteristicas[0].caracteristica_1 }}</li>
+            <li>{{ product.caracteristicas[1].caracteristica_2 }}</li>
+            <li>{{ product.caracteristicas[2].caracteristica_3 }}</li>
+            <li>{{ product.caracteristicas[3].caracteristica_4 }}</li>
+            <li>{{ product.caracteristicas[4].caracteristica_5 }}</li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-actions">
+          <p class="product-price">Precio: ${{product.precio}}</p>
+          <button class="buy-button">Comprar</button>
+          <button class="customize-button">Personalizar producto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <TheFooter class="footer" />
+</template>
 
 <style scoped>
 .product-image{

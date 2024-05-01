@@ -12,8 +12,8 @@ export default {
     this.products = await service.getAll();
   },
   methods: {
-    goToProductDetail() {
-      window.location.href = 'http://localhost:5173/product_detail';
+    goToProductDetail(productId) {
+      this.$router.push(`/product_detail/${productId}`);
     }
   }
 }
@@ -25,7 +25,7 @@ export default {
     <div class="product-info">
       <h2 class="product-name">{{ product.nombre }}</h2>
       <p class="product-description">{{ product.descripcion }}</p>
-      <div class="product-price" @click="goToProductDetail">Precio: ${{ product.precio }}</div>
+      <div class="product-price" @click="goToProductDetail(product.id)">Precio: ${{ product.precio }}</div>
     </div>
   </div>
 </template>

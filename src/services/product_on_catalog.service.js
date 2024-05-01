@@ -9,7 +9,7 @@ export class ProductCatalogService {
     const response = await http.get('productos');
     return response.data;
   }
-  async get(id) {
+  async getProductDetail(id) {
     const response = await http.get(`productos/${id}`);
     return response.data;
   }
