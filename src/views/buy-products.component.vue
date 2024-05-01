@@ -18,6 +18,7 @@ export default {
     };
   },
   methods: {
+
     toggleSizeSection() {
       this.chooseSizeCategory = !this.chooseSizeCategory;
       if (this.chooseCategory) {
@@ -33,7 +34,7 @@ export default {
     toggle(event) {
       this.$refs.op.toggle(event);
     },
-    validateAndBuy() {
+    validateAndBuy(productId) {
       console.log('selectedTamanio:', this.selectedTamanio);
       console.log('parameter:', this.parameter);
 
@@ -43,6 +44,15 @@ export default {
       } else {
         console.log('hay parametros');
         this.showErrorMessage = false;
+        this.$router.push(`/acquisition/${productId}`);
+        this.$router.push({
+          name: 'Acquisition',
+          params: {
+            id: productId,
+            selectedTamanio: this.selectedTamanio,
+            parameter: this.parameter
+          }
+        });
       }
     },
 
@@ -94,7 +104,7 @@ export default {
         <template #subtitle>$ {{product.precio}}</template>
         <template #content>
           <div class="button-right">
-            <pv-button label="Comprar" class="w-full" style="margin-bottom: 10px;" @click="validateAndBuy" />            <pv-button label="Personalizar producto" class="w-full" />
+            <pv-button label="Comprar" class="w-full" style="margin-bottom: 10px;" @click="validateAndBuy(product.id)" />            <pv-button label="Personalizar producto" class="w-full" />
           </div>
         </template>
 

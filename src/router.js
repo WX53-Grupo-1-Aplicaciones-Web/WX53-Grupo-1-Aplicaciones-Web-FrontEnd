@@ -21,7 +21,7 @@ const routes = [
 
   { path: '/catalog', component: TheCatalog },
   { path: '/parameters', component: Parameters },
-  { path: '/acquisition', component: Acquisition },
+  { path: '/acquisition/:id', component: Acquisition },
   { path: '/publication', component: PublicationProduct },
   { path: '/profile_information', component: TheProfileInformation },
   { path: '/profile_edit', component: TheProfileEdit },

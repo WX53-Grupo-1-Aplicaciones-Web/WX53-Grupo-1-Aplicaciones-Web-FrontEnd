@@ -13,4 +13,14 @@ export class ProductCatalogService {
     const response = await http.get(`productos/${id}`);
     return response.data;
   }
+
+  async createBill(billDetails) {
+    try {
+      const response = await http.post('boletas', billDetails);
+      return response.data;
+    } catch (error) {
+      console.error('Error al crear la boleta', error);
+      throw error;
+    }
+  }
 }
