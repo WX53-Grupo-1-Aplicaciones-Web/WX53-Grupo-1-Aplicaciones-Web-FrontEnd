@@ -1,62 +1,116 @@
+<script>
+import AppToolbar from '@/components/the-application-toolbar.component.vue'
+import {ProductCatalogService} from '@/services/product_on_catalog.service.js'
+
+export default {
+  name: 'TheCatalog',
+  components: {
+    AppToolbar,
+  },
+
+  data() {
+    return {
+      product: null,
+      tamanios: [],
+      selectedTamanio: null,
+      parameter: null,
+      showErrorMessage: false,
+    };
+  },
+  methods: {
+    toggleSizeSection() {
+      this.chooseSizeCategory = !this.chooseSizeCategory;
+      if (this.chooseCategory) {
+        this.chooseCategory = false;
+      }
+    },
+    async getProductDetail(id) {
+      const service = new ProductCatalogService();
+      this.product = await service.getProductDetail(id);
+      this.tamanios = this.product.parametros_personalizacion['tamanio'];
+    },
+
+    toggle(event) {
+      this.$refs.op.toggle(event);
+    },
+    validateAndBuy() {
+      console.log('selectedTamanio:', this.selectedTamanio);
+      console.log('parameter:', this.parameter);
+
+      if (this.selectedTamanio === null || this.selectedTamanio === '' || this.parameter === null || this.parameter === '') {
+        console.log('faltan parametros');
+        this.showErrorMessage = true;
+      } else {
+        console.log('hay parametros');
+        this.showErrorMessage = false;
+      }
+    },
+
+  },
+  mounted() {
+    this.getProductDetail(this.$route.params.id);
+  },
+
+}
+
+</script>
 <template>
     <div>
     <AppToolbar></AppToolbar>
     <div class="card-container">
-    <pv-card class="card" v-for="(producto, index) in productos" :key="index">
+      <pv-card class="card" v-if="product">
         <template #header>
-          <img alt="user header" src="https://content.emarket.pe/common/collections/content/ed/3a/ed3aa421-2085-464d-98d9-ee37850290c8.png" style="width: 300px; height: auto; margin-right: 20px;" />
+          <img  v-if="product" alt="user header" :src="'/'+product.imagen" style="width: 300px; height: auto; margin-right: 20px;" />
         </template>
         <template #title><strong>¡Este producto puede personalizarse!</strong></template>
         <template #content>
           <div class="content-container">
-              <p>Elije los cambios personalizados por defecto para este producto</p>
+            <p>Elije los cambios personalizados por defecto para este producto</p>
           </div>
           <div class="input-container">
-              <label for="color" class="input-label">Color</label>
-              <pv-dropdown v-model="producto.parametros_personalizacion.color" :options="colors" placeholder="Elije un color" class="input-field" />
+            <label for="color" class="input-label" >{{ Object.keys(product.parametros_personalizacion)[0] }}</label>
+            <pv-dropdown v-model="parameter" :options="product.parametros_personalizacion[Object.keys(product.parametros_personalizacion)[0]]" :placeholder="product.input_text" class="input-field" />
           </div>
           <div class="radio-container flex flex-column gap-3">
-              <label for="tamaño" class="input-label">Tamaño</label>
-              <div v-for="tamaño in tamaños" :key="tamaño" class="flex flex-row align-items-center">
-                  <pv-radio-button v-model="selectedCategory" :inputId="tamaño" :value="tamaño" />
-                  <label :for="tamaño" class="ml-2">{{ tamaño }}</label>
-              </div>
+            <label for="tamanios" class="input-label">Tamaño</label>
+            <div v-for="tamanio in tamanios" :key="tamanio" class="flex flex-row align-items-center">
+              <pv-radio-button v-model="selectedTamanio" :inputId="tamanio" :value="tamanio" />
+              <label :for="tamanio" class="ml-2">{{ tamanio }}</label>
+            </div>
           </div>
-
         </template>
         <template #footer>
         </template>
-    </pv-card>
+      </pv-card>
 
 
 
     <!-- Card 2 -->
-    <pv-card class="second-card" style="width: 20%; " v-if="productos && productos.length > 0">
+      <!-- Card 2 -->
+      <pv-card class="second-card" style="width: 20%;" v-if="product">
         <template #header>
         </template>
         <template #title>Precio</template>
-        <template #subtitle>S/.{{ productos[0].precio }}</template>
+        <template #subtitle>$ {{product.precio}}</template>
         <template #content>
           <div class="button-right">
-            <pv-button label="Comprar" class="w-full" style="margin-bottom: 10px;"/>
-            <pv-button label="Personalizar producto" class="w-full" />
+            <pv-button label="Comprar" class="w-full" style="margin-bottom: 10px;" @click="validateAndBuy" />            <pv-button label="Personalizar producto" class="w-full" />
           </div>
         </template>
 
         <template #footer>
-            <div class="flex flex-column items-center gap-3 mt-1">
-              <img alt="user header" src="https://i.pinimg.com/736x/86/cf/a7/86cfa7e4db63b79deb6c11beaeb1fd1b.jpg" style="width: 100px; height: auto; margin-right: 20px;" />
-              <p><strong>Autor:</strong>{{ productos[0].autor }}</p>
-
-            </div>
+          <div class="flex flex-column items-center gap-3 mt-1">
+            <img alt="user header" src="https://i.pinimg.com/736x/86/cf/a7/86cfa7e4db63b79deb6c11beaeb1fd1b.jpg" style="width: 100px; height: auto; margin-right: 20px;" />
+            <p><strong>Autor:</strong> {{product.autor}}</p>
+          </div>
         </template>
-    </pv-card>
+      </pv-card>
 
    </div>
 
    </div>
 
-   <pv-message class="messageinfo" severity="info">Puedes conversar con el artesano para personalizar tu producto de formas adicionales</pv-message> 
+   <pv-message class="messageinfo" severity="info">Puedes conversar con el artesano para personalizar tu producto de formas adicionales</pv-message>
 
    <div class="message-container">
           <div>
@@ -71,79 +125,16 @@
                   </div>
               </pv-overlay-panel>
           </div>
-        
+
     </div>
+  <p v-if="showErrorMessage" class="error-message">Por favor, selecciona los parametros antes de comprar.</p>
 </template>
 
-<script>
-import AppToolbar from '@/components/the-application-toolbar.component.vue'
-import {ProductApiServices} from '@/services/cliente-products-api.service.js'
-export default {
-  name: 'TheCatalog',
-  components: {
-    AppToolbar,
-  },
-
-  data() {
-    return {
-    productos: null,
-    selectedCategory: 'Production',
-    tamaño: "",
-    tamaños: [],
-    color: "",
-    colors: [],
-  };
-  },
-  methods: {
-    toggleSizeSection() {
-      this.chooseSizeCategory = !this.chooseSizeCategory;
-      if (this.chooseCategory) {
-        this.chooseCategory = false; 
-      }
-    },
-
-    toggle(event) {
-      this.$refs.op.toggle(event);
-    }
-  },
-  mounted() {
-    const productApi = new ProductApiServices();
-
-    productApi.getAll()
-
-    .then(response => {
-      console.log('Respuesta del servidor:', response.data);
-      const productos = response?.data;
-      if (Array.isArray(productos) && productos.length > 0) {
-        this.productos = productos;
-
-        this.colors = this.productos.reduce((acumulador, producto) => {
-          return acumulador.concat(producto?.parametros_personalizacion?.color || []);
-        }, []);
-        this.tamaños = this.productos.reduce((acumulador, producto) => {
-          return acumulador.concat(producto?.parametros_personalizacion?.tamaño || []);
-        }, []);
-
-        this.colors = Array.from(new Set(this.colors));
-        //console.log('Colores disponibles:', this.colors);
-        this.tamaños = Array.from(new Set(this.tamaños));
-        //console.log('Materiales disponibles:', this.tamaños);
-
-      } else {
-        console.error('La respuesta del servidor no tiene la estructura esperada o no contiene productos.');
-      }
-    })
-    .catch(error => {
-      console.error('Error al obtener los productos:', error);
-    });
-
-  },
-}
-
-</script>
 
 <style>
-
+.error-message {
+  color: red;
+}
 .messageinfo {
   position: fixed;
   bottom: 0;

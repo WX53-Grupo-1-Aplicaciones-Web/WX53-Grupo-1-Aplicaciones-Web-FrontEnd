@@ -20,13 +20,13 @@ const routes = [
   { path: '/resetPassword', component: ResetPassword},
 
   { path: '/catalog', component: TheCatalog },
-  { path: '/product_detail/:id', component: TheProductDetail },
   { path: '/parameters', component: Parameters },
   { path: '/acquisition', component: Acquisition },
-  { path: '/buyProducts', component: BuyProducts },
   { path: '/publication', component: PublicationProduct },
   { path: '/profile_information', component: TheProfileInformation },
   { path: '/profile_edit', component: TheProfileEdit },
+  { path: '/buyProducts/:id', component: BuyProducts },
+  { path: '/product_detail/:id', component: TheProductDetail },
 ]
 
 const router = createRouter({

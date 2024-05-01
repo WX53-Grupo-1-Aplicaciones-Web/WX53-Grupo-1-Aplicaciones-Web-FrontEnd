@@ -21,6 +21,9 @@ export default {
     async getProductDetail(id) {
       const service = new ProductCatalogService();
       this.product = await service.getProductDetail(id);
+    },
+    goToBuyProduct(productId) {
+      this.$router.push(`/buyProducts/${productId}`);
     }
   },
   created() {
@@ -66,7 +69,7 @@ export default {
       <div class="product-info">
         <div class="product-actions">
           <p class="product-price">Precio: ${{product.precio}}</p>
-          <button class="buy-button">Comprar</button>
+          <button class="buy-button" @click="goToBuyProduct(product.id)">Comprar</button>
           <button class="customize-button">Personalizar producto</button>
         </div>
       </div>

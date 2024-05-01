@@ -1,4 +1,5 @@
 {
+
     "clientes": [
       {
         "usuario": "DavidW",
@@ -34,12 +35,13 @@
         "detalles": "Detalles adicionales sobre el producto 1",
         "detalles_del_artesano": "Información del artesano sobre el producto",
         "parametros_personalizacion": {
-          "color": ["rojo", "azul", "verde"],
+          "Colores": ["rojo", "azul", "verde"],
           "material": ["madera", "metal"],
-          "tamaño": ["Grande", "Mediano", "Pequeño"],
+          "tamanio": ["Grande", "Mediano", "Pequeño"],
           "gravado": "Detalles de gravado para el producto 1"
         },
         "tamaño": 10,
+        "input_text": "Elige un color",
         "gravado": "Detalles de gravado para el producto 1",
         "categoria": "Categoría 1",
         "imagen": "src/images/mateBurilado.png",
@@ -57,16 +59,17 @@
         "id": "prd02",
         "nombre": "Miel de abeja  ",
         "descripcion": "Miel 100% natural y real. Cosechada de manera artesanal en los Andes peruanos (sobre los 2500msnm). No ha sido pasteurizada, gracias a ello conserva todas sus propiedades terapéuticas. Contiene todos los componentes de la mierl rela: polen, propóleo, cera, jalea real, enzimas vivas.",
-        "precio": 29.99,
+        "precio": 12.99,
         "detalles": "Detalles adicionales sobre el producto 1",
         "detalles_del_artesano": "Miel 100% natural y real. Cosechada de manera artesanal",
         "parametros_personalizacion": {
-          "color": ["rojo", "azul", "verde"],
+          "Unidades": ["1", "2", "3"],
           "material": ["madera", "metal"],
-          "tamaño": ["Grande", "Mediano", "Pequeño"],
+          "tamanio": ["Grande", "Mediano", "Pequeño"],
           "gravado": "Detalles de gravado para el producto 1"
         },
         "tamaño": 10,
+        "input_text": "Elige las unidades",
         "gravado": "Detalles de gravado para el producto 1",
         "categoria": "Alimento",
         "imagen": "src/images/mielAbeja.png",
@@ -80,6 +83,9 @@
           {"caracteristica_5": "Contiene todos los componentes de la mierl rela: polen, propóleo, cera, jalea real, enzimas vivas."}
         ]
       }
-    ]
+    ],
+  "boletas": [
+
+  ]
   }
   
