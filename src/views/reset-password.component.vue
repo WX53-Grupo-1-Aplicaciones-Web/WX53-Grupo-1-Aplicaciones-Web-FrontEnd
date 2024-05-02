@@ -6,26 +6,26 @@
     <div class="login-wrapper">
       <div class="login-form">
         <div class="login-header">
-          <h2>Actualizar Contraseña</h2>
+          <h2>{{ $t('passchange.title') }}</h2>
         </div>
 
         <form @submit.prevent="handleSubmit">
           <div class="form-group">
-            <label for="user">Usuario:</label>
+            <label for="user">{{ $t('passchange.user') }}</label>
             <input type="text" id="user" v-model="user" required />
           </div>
 
           <div class="form-group">
-            <label for="password">Contraseña:</label>
+            <label for="password">{{ $t('passchange.password') }}</label>
             <input type="password" id="password" v-model="password" required />
           </div>
 
           <div class="form-group">
-            <label for="password">Actualizar Contraseña:</label>
+            <label for="password">{{ $t('passchange.confirm') }}</label>
             <input type="password" id="password" v-model="password" required />
           </div>
 
-          <button type="submit">Actualizar</button>
+          <button type="submit" onclick = " window.location.href = '/' ">{{ $t('passchange.reset') }}</button>
         </form>
       </div>
     </div>
@@ -116,5 +116,10 @@ button {
   cursor: pointer;
   margin-top: 10px;
   border-radius: 20px;
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 20px;
 }
 </style>
