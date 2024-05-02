@@ -17,9 +17,11 @@
       <div class="circle">
         <img src="../images/cartIcon.png" alt="Cart" class="icon">
       </div>
-      <div class="circle">
-        <img src="../images/profileIcon.png" alt="Profile" class="icon">
-      </div>
+      <router-link to="/profile_information">
+        <div class="circle">
+          <img src="../images/profileIcon.png" alt="Profile" class="icon">
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
