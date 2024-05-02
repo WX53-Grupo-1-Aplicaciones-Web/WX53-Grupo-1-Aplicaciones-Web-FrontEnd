@@ -19,9 +19,11 @@ export default {
       <button class = "icon-button">
         <img src="../images/photoIcon.png" alt="Ícono">
       </button>
-      <button class = "save-button">
-        <p>Guardar cambios</p>
-      </button>
+      <router-link to="/catalog">
+        <button class = "save-button">
+          <p>Guardar cambios</p>
+        </button>
+      </router-link>
       <div class = "profile-text">
         <h2 class="personal-info">Información personal</h2>
         <label class="mail">Correo</label>
