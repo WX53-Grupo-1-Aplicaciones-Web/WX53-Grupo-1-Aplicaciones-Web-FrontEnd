@@ -1,226 +1,245 @@
 <template>
-    <div>
-      <AppToolbar></AppToolbar>
-      <pv-card class="card">
-        <template #header>
-          <div class="edit-button-container">
-            <pv-button v-on:click="editProduct" label="Editar Imagen" class="edit-button"/> -->
-            <!-- <pv-file-upload mode="basic" name="demo[]" url="/api/upload" accept="image/*" :maxFileSize="1000000" @upload="onUpload" :auto="true" chooseLabel="Editar Imagen" /> -->
-          </div>    
-          <img alt="user header" src="https://content.emarket.pe/common/collections/content/ed/3a/ed3aa421-2085-464d-98d9-ee37850290c8.png" style="width: 300px; height: auto; margin-right: 20px;" />
-          
-        </template>
-        <template #title><strong>Publica tu producto</strong></template>
-        <template #content>
-          <div class="content-container">
-            <div class="input-container">
-              <label for="productName" class="input-label">Nombre del Producto</label>
-              <pv-input-text id="productName" v-model="productName" placeholder="Ingrese el nombre del producto" aria-describedby="productName-help" class="input-field" />
-            </div>
-            
-            <div class="input-container">
-              <label for="category" class="input-label">Categoria</label>
-              <pv-dropdown v-model="category" :options="categories" placeholder="Seleccione la categoría" class="input-field" />
-            </div>
-            
-            <div class="input-container">
-              <label for="productPrice" class="input-label">Precio del Producto (PEN)</label>
-              <input type="text" id="productPrice" v-model="productPrice" @input="formatCurrency" placeholder="0.00" class="input-field" />
-            </div>
 
-            <div class="input-container">
-              <label for="productDescription" class="input-label">Descripcion del Producto</label>
-              <pv-textarea v-model="productDescription" rows="5" cols="30" class="input-field" placeholder="Escriba una descripción del producto" />
-            </div>
-            
-            <div class="input-container">
-              <label for="checkbox" class="input-label">Producto personalizable </label>
-              <pv-checkbox v-model="productPersonalizable" :binary="true" />
-            </div>
-          </div>
-  
-          <div class="publish-button-container">
-            <pv-button label="Publicar" class="publish-button" @click="publishProduct" />
-          </div>
-        </template> 
-        <template #footer>
-          <div class="flex gap-3 mt-1"></div>
-        </template>
-      </pv-card>
-    </div>
+  <AppToolbar></AppToolbar>
+  <pv-card class="card">
+    <template #header>
+      <img alt="user header" src="https://content.emarket.pe/common/collections/content/ed/3a/ed3aa421-2085-464d-98d9-ee37850290c8.png" style="width: 300px; height: auto; margin-right: 20px;" />
+    </template>
+    <template #title><strong>Publica tu producto</strong></template>
+    <template #content>
+      <div class="input-container">
+        <label for="productName" class="input-label">Nombre del Producto</label>
+        <pv-input-text id="productName" v-model="productName" placeholder="Ingrese el nombre del producto" aria-describedby="productName-help" class="input-field" />
+      </div>
+      
+      <div class="input-container">
+        <label for="category" class="input-label">Categoria</label>
+        <pv-dropdown v-model="category" :options="categories" placeholder="Seleccione la categoría" class="input-field" />
+      </div>
+      
+      <div class="input-container">
+        <label for="productPrice" class="input-label">Precio del Producto (PEN)</label>
+        <input type="text" id="productPrice" v-model="productPrice" @input="formatCurrency" placeholder="0.00" class="input-field" />
+      </div>
+      
+      <div class="input-container">
+          <label for="productDescription" class="input-label">Descripcion del Producto</label>
+          <pv-textarea v-model="productDescription" rows="5" cols="30" class="input-field" placeholder="Escriba una descripción del producto" />
+      </div>
 
-  </template>
-  
+      <div class="input-container">
+        <label for="checkbox" class="input-label">Producto personalizable </label>
+        <pv-checkbox @change="redirectToParameters" v-model="productOnSale" :binary="true" />
+      </div>
+      <div class="publish-button-container">
+          <pv-button label="Publicar" class="publish-button" @click="publishProduct" />
+      </div>
+    </template> 
+    <template #footer>
+      <div class="flex gap-3 mt-1"></div>
+    </template>
+  </pv-card>
+
+</template>
+
 <script>
 import AppToolbar from '@/components/the-application-toolbar.component.vue'
 import {ProductApiServices} from '@/services/cliente-products-api.service.js'
 
 export default {
-  name: 'TheCatalog',
-  components: {
-    AppToolbar,
-  },
-  data() {
-    return {
-      productos: null,
-      color: "", 
-      visible: false, 
-      chooseSizeCategory: false,
-      chooseCategory: true,
-      productName: "", 
-      tamaño: "",
-      category: "",
-      categories: ["Joyería artesanal", "Textiles y tejidos", "Cerámica y alfarería", "Artesanía en madera", "Artesanía en cuero",
-        "Arte visual", "Cuidado personal", "Juguetes", "Decoración del hogar", "Productos gastronómicos artesanales"], // Ejemplo de opciones de material
-      confirm: null,
-      toast: null,
-      productPrice: '', 
-      productPersonalizable: false, 
-      productDescription: '',
-    };
-  },
-  methods: {
-    toggleSizeSection() {
-      this.chooseSizeCategory = !this.chooseSizeCategory;
-      if (this.chooseCategory) {
-        this.chooseCategory = false; 
-      }
-    },
-    formatCurrency(event) {
-      // Remueve cualquier caracter que no sea un dígito o un punto decimal
-      let formattedValue = event.target.value.replace(/[^0-9.]/g, '');
-      // Divide el valor por mil para separar los miles
-      formattedValue = formattedValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      // Limita el número de decimales a dos
-      formattedValue = formattedValue.replace(/^(\d*\.\d{2}).*$/, '$1');
-      // Actualiza el valor del campo de entrada
-      this.productPrice = formattedValue;
-    },
-    onUpload() {
-            this.$toast.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
-    },
+name: 'TheCatalog',
+components: {
+  AppToolbar,
+},
+data() {
+  return {
 
-    async publishProduct() {
+    visible: false, 
+    chooseSizeCategory: false,
+    chooseCategory: true,
+    productName: "", 
+
+    category: "",
+    categories: [], 
+    confirm: null,
+    toast: null,
+    productPrice: '', 
+    productOnSale: false, 
+    allProductCharacteristics: { 
+        color: [],
+        tamaño: [],
+        material: ''
+      }
+  };
+},
+methods: {
+
+  async redirectToParameters() {
+    if (this.productOnSale) {
+    const newProduct = {
+      id: 0, 
+      color: [], 
+      tamaño: [], 
+      material: '', 
+      nombre: this.productName,
+      categoria: this.category,
+      precio: parseFloat(this.productPrice), 
+      descripcion: this.productDescription
+    };
+
+
     try {
-      const response = await http.post('productos', {
-        nombre: this.productName,
-        categoria: this.category,
-        precio: this.productPrice,
-        description: this.productDescription,
-        personalizable: this.productPersonalizable
-      });
-      console.log('Producto publicado:', response.data);
-      // Aquí podrías mostrar un mensaje de éxito o redirigir al usuario a otra página
+      const productService = new ProductApiServices();
+      await productService.publishProduct(newProduct);
     } catch (error) {
       console.error('Error al publicar el producto:', error);
-      // Aquí podrías mostrar un mensaje de error al usuario
     }
+      this.$router.push('/parameters');
+    }
+
+  },
+  toggleSizeSection() {
+    this.chooseSizeCategory = !this.chooseSizeCategory;
+    if (this.chooseCategory) {
+      this.chooseCategory = false; 
+    }
+  },
+  formatCurrency(event) {
+    let formattedValue = event.target.value.replace(/[^0-9.]/g, '');
+    formattedValue = formattedValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    formattedValue = formattedValue.replace(/^(\d*\.\d{2}).*$/, '$1');
+    this.productPrice = formattedValue;
+  },
+
+  
+  async publishProduct() {
+  const allProducts = this.productsData.map(productData => ({
+    ...this.allProductCharacteristics,
+    nombre: productData.nombre,
+    categoria: productData.categoria,
+    precio: parseFloat(productData.precio),
+    descripcion: productData.descripcion,
+    color: productData.color,
+    tamaño: productData.tamaño,
+    material: productData.material
+  }));
+
+  try {
+    const productService = new ProductApiServices();
+    for (const product of allProducts) {
+      await productService.publishProduct(product);
+    }
+    this.$router.push('/parameters');
+  } catch (error) {
+    console.error('Error al publicar los productos:', error);
   }
   },
-
-  mounted() {
-  const productApi = new ProductApiServices();
-  productApi.getAll()
-    .then(response => {
-      console.log(response.data);
-      this.productos = response.data;
-    })
-    .catch(error => {
-      console.error('Error al obtener los productos:', error);
-    });
+  formatCurrency(event) {
+    let formattedValue = event.target.value.replace(/[^0-9.]/g, '');
+    formattedValue = formattedValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    formattedValue = formattedValue.replace(/^(\d*\.\d{2}).*$/, '$1');
+    this.productPrice = formattedValue;
   },
+  
+},
+async created() {
+  try {
+    const productService = new ProductApiServices();
+    this.categories = await productService.getProductCategories();
+  } catch (error) {
+    console.error('Error fetching product categories:', error);
+  }
 }
 
+}
 </script>
 
 <style>
 .card {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin: 20px;
-  width: 100%;
-  background-color: #E0EDFF;
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+margin: 20px;
+width: 100%;
+background-color: #E0EDFF;
 }
 
 .content-container {
-  flex-grow: 1; 
+flex-grow: 1; 
 }
 
 .input-container {
-  width: 100%;
-  margin-bottom: 20px;
+width: 100%;
+margin-bottom: 20px;
 }
 
 .input-label {
-  font-weight: bold;
-  margin-bottom: 5px;
+font-weight: bold;
+margin-bottom: 5px;
 }
 
 .input-field {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+width: 100%;
+padding: 8px;
+border: 1px solid #ccc;
+border-radius: 4px;
 }
 
 .publish-button-container {
-  width: 100%;
+width: 100%;
 }
 
 .publish-button {
-  width: 100%;
-  background-color: #064789;
-  color: white;
-  border: none;    border-radius: 8px;
-  padding: 10px;
+width: 100%;
+background-color: #064789;
+color: white;
+border: none;    border-radius: 8px;
+padding: 10px;
 }
 
 .publish-button:hover {
-  background-color: darkblue;
+background-color: darkblue;
 }
 
-/* Media query para pantallas más pequeñas */
 @media only screen and (max-width: 768px) {
-  .card {
-    flex-direction: column; 
-    align-items: center; 
-  }
+.card {
+  flex-direction: column; 
+  align-items: center; 
+}
 
-  .content-container {
-    width: 100%; 
-    margin-right: 0; 
-  }
+.content-container {
+  width: 100%; 
+  margin-right: 0; 
+}
 
-  .publish-button-container {
-    width: 90%; 
-  }
+.publish-button-container {
+  width: 90%; 
+}
 }
 .edit-button {
-  background-color: #116BC7;
-  color: white;
-  border: none;    border-radius: 8px;
-  padding: 6px 11px;
-  margin-left: auto; 
+background-color: #116BC7;
+color: white;
+border: none;    border-radius: 8px;
+padding: 6px 11px;
+margin-left: auto; 
 }
 .edit-button-container {
-  padding: 10px 0px;
+padding: 10px 0px;
 }
 
 .description-input {
-  width: 100%; /* Asegurando que el ancho sea del 100% */
-  height: auto; /* Cambiado a "auto" para que el alto se ajuste dinámicamente */
-  min-height: 100px; /* Altura mínima del cuadro de texto */
-  max-height: 200px; /* Altura máxima del cuadro de texto (ajústalo según tus necesidades) */
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  overflow-y: scroll; /* Utilizamos scroll para que aparezca una barra de desplazamiento vertical si es necesario */
-  resize: vertical; /* Permite que el usuario redimensione verticalmente el cuadro de texto */
-  word-wrap: break-word; /* Rompe las palabras largas y las lleva a la siguiente línea */
-  white-space: pre-wrap; /* Mantiene el formato del texto y los saltos de línea */
+width: 100%; 
+height: auto; 
+min-height: 100px; 
+max-height: 200px; 
+padding: 8px;
+border: 1px solid #ccc;
+border-radius: 4px;
+overflow-y: scroll; 
+resize: vertical; 
+word-wrap: break-word; 
+white-space: pre-wrap; 
 }
 
 </style>
-
