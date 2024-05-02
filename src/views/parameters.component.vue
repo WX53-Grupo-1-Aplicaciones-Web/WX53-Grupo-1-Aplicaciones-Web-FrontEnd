@@ -1,6 +1,7 @@
 <script>
 import { useRouter } from 'vue-router';
 import { ProductApiServices } from '@/services/cliente-products-api.service.js'
+import {ProductCatalogService} from '@/services/product_on_catalog.service.js'
 import AppToolbar from '@/components/the-application-toolbar.component.vue'
 export default {
   name: "personalizar-card",
@@ -20,6 +21,7 @@ export default {
       material: "",
       materiales: [],
       grabado: "",
+      imagen:"",
       color: "",
       colors: [],
       confirm: null,
@@ -45,25 +47,32 @@ export default {
     },
     async saveProducto() {
       const productService = new ProductApiServices();
+      const catalogService = new ProductCatalogService()
       const product = await productService.getProduct("0");
 
       const updatedCharacteristics = {
-
         color: this.color,
         tamanio: this.tamanio,
         material: this.material,
         nombre: product.nombre,
         categoria: product.categoria,
         precio: product.precio,
+        imagen:product.imagen,
         descripcion: product.descripcion
       };
 
       try {
-        const productService = new ProductApiServices();
-        await productService.saveProducto(updatedCharacteristics);
-        this.$emit('save-success');
+        const publishedProducts = await productService.getPublishedProducts();
         await productService.deleteProduct("0");
 
+
+
+        await productService.saveProducto(updatedCharacteristics);
+        this.$emit('save-success');
+        for (const publishedProduct of publishedProducts) {
+          await catalogService.addProduct(publishedProduct);
+
+        }
       } catch (error) {
         console.error('Error saving product:', error);
       }
@@ -71,12 +80,14 @@ export default {
   },
   async created() {
     try {
+
       const productService = new ProductApiServices();
       const characteristics = await productService.getProductCharacteristics();
 
       this.colors = characteristics.color;
       this.materiales = characteristics.material;
       this.tamanios = characteristics.tamanio;
+
     } catch (error) {
       console.error('Error fetching product characteristics:', error);
 
@@ -110,7 +121,7 @@ export default {
 
         <div v-if="showSizeSection">
           <label for="tamanio" class="font-bold block mb-2"> Tamaño</label>
-          <pv-multi-select  v-model="tamaño" display="chip" :options="tamanios"  placeholder="Seleccione el tamaño"
+          <pv-multi-select  v-model="tamanio" display="chip" :options="tamanios"  placeholder="Seleccione el tamaño"
             :maxSelectedLabels="3"  class="input-width"/>
         </div>
 

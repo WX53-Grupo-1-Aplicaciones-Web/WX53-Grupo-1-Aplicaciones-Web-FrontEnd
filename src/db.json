@@ -223,45 +223,6 @@
     }
   ],
   "producto_publicado": [
-    {
-      "id": "e06d",
-      "color": [
-        "rojo",
-        "verde",
-        "amarillo",
-        "azul",
-        "anaranjado"
-      ],
-      "tamanio": [
-        "pequeño",
-        "mediano",
-        "grande"
-      ],
-      "material": "ceramica",
-      "nombre": "Estatuillas de heroes fundadores",
-      "categoria": "Cerámica y alfarería",
-      "precio": 25,
-      "descripcion": "La cerámica es el arte de fabricar vasijas​ y otros objetos de arcilla u otro material cerámico por acción del calor, es decir cocida a una temperatura superior a los 900 grados.​"
-    },
-    {
-      "id": "0",
-      "color": [],
-      "tamanio": [],
-      "material": "",
-      "nombre": "Estatuillas de heroes fundadores 2",
-      "categoria": "Artesanía en cuero",
-      "precio": 40,
-      "descripcion": "La cerámica es el arte de fabricar vasijas​ y otros objetos de arcilla u otro material cerámico por acción del calor, es decir cocida a una temperatura superior a los 900 grados.​"
-    },
-    {
-      "id": "0",
-      "color": [],
-      "tamaño": [],
-      "material": "",
-      "nombre": "Estatuillas de heroes fundadores",
-      "categoria": "Textiles y tejidos",
-      "precio": 25,
-      "descripcion": "La cerámica es el arte de fabricar vasijas​ y otros objetos de arcilla u otro material cerámico por acción del calor, es decir cocida a una temperatura superior a los 900 grados.​afadfs"
-    }
+
   ]
 }

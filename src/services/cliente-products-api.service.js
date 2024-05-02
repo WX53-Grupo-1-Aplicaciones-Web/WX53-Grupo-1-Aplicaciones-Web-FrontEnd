@@ -70,4 +70,23 @@ async saveProducto(data) {
       throw error;
     }
   }
+  async getPublishedProducts() {
+    try {
+      const response = await this.http.get('producto_publicado');
+      return response.data;
+    } catch (error) {
+      console.error('Error getting published products:', error);
+      throw error;
+    }
+  }
+
+  async saveProduct(productData) {
+    try {
+      const response = await this.http.post('productos', productData);
+      return response.data;
+    } catch (error) {
+      console.error('Error saving product:', error);
+      throw error;
+    }
+  }
 }

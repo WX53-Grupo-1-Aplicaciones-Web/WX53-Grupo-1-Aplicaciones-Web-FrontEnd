@@ -21,7 +21,12 @@
         <label for="productPrice" class="input-label">Precio del Producto (PEN)</label>
         <input type="text" id="productPrice" v-model="productPrice" @input="formatCurrency" placeholder="0.00" class="input-field" />
       </div>
-      
+
+      <div class="input-container">
+        <label for="imagen" class="input-label">Imagen del producto</label>
+        <pv-input-text id="imagen" v-model="imagen" placeholder="Ingrese la imagen del producto (url)" aria-describedby="productImage-help" class="input-field" />
+      </div>
+
       <div class="input-container">
           <label for="productDescription" class="input-label">Descripcion del Producto</label>
           <pv-textarea v-model="productDescription" rows="5" cols="30" class="input-field" placeholder="Escriba una descripción del producto" />
@@ -57,8 +62,8 @@ data() {
     visible: false, 
     chooseSizeCategory: false,
     chooseCategory: true,
-    productName: "", 
-
+    productName: "",
+    imagen:"",
     category: "",
     categories: [], 
     confirm: null,
@@ -83,6 +88,7 @@ methods: {
       material: '',
       nombre: this.productName,
       categoria: this.category,
+      imagen:this.imagen,
       precio: parseFloat(this.productPrice),
       descripcion: this.productDescription
     };
@@ -118,6 +124,7 @@ methods: {
     nombre: productData.nombre,
     categoria: productData.categoria,
     precio: parseFloat(productData.precio),
+    imagen: productData.imagen,
     descripcion: productData.descripcion,
     color: productData.color,
     tamanio: productData.tamanio,
