@@ -223,9 +223,16 @@
     }
   ],
   "producto_publicado": [
-
+    {
+      "id": "4580",
+      "color": "",
+      "tamanio": "",
+      "material": "",
+      "nombre": "",
+      "categoria": "",
+      "precio": null,
+      "imagen": ""
+    }
   ],
-  "producto_aux": [
-
-  ]
+  "producto_aux": []
 }
