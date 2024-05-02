@@ -6,28 +6,31 @@
     <div class="login-wrapper">
       <div class="login-form">
         <div class="login-header">
-          <h2>Inicio de sesión</h2>
-          <p>Bienvenido a ARTISANIA</p>
+          <h2>{{ $t('login.title') }}</h2>
+          <p>{{ $t('login.welcome') }}</p>
         </div>
 
         <form @submit.prevent="handleSubmit">
           <div class="form-group">
-            <label for="email">Correo electrónico:</label>
+            <label for="email">{{ $t('login.emailLabel') }}</label>
             <input type="email" id="email" v-model="email" required />
           </div>
 
           <div class="form-group">
-            <label for="password">Contraseña:</label>
+            <label for="password">{{ $t('login.passwordLabel') }}</label>
             <input type="password" id="password" v-model="password" required />
           </div>
 
-          <button type="submit">Iniciar sesión</button>
+          <button type="submit">{{ $t('login.signInButton') }}</button>
         </form>
 
         <div class="login-footer">
-          <p>¿No tienes una cuenta? <a href="#">Regístrate</a></p>
-          <p><a href="#">¿Olvidaste tu contraseña?</a></p>
+          <p>{{ $t('login.noAccount') }} <a href="#" @click="goToRegister">{{ $t('login.registerLink') }}</a></p>
+          <p><a href="#" onclick="window.location.href = '/resetPassword'">{{ $t('login.forgotPasswordLink') }}</a></p>
         </div>
+
+        <!-- Mostrar mensaje de error -->
+        <p v-if="error">{{ error }}</p>
       </div>
     </div>
   </div>
@@ -40,14 +43,46 @@
 <script>
 import LoginToolbar from '@/components/toolbar-login.component.vue'
 import Footer from '@/components/the-footer.component.vue'
+import dbData from '/src/db.json'
+
 export default {
   name: 'TheLogin',
   components: {
     LoginToolbar,
     Footer,
+  },
+  data() {
+    return {
+      email: '',
+      password: '',
+      error: '' // Agrega una propiedad para almacenar el mensaje de error
+    };
+  },
+  methods: {
+    async handleSubmit() {
+      try {
+        // Accede a los datos del archivo JSON importado
+        const clientes = dbData.clientes;
+
+        // Busca el usuario en la lista de clientes
+        const cliente = clientes.find(cliente => cliente.correo === this.email && cliente.contraseña === this.password);
+
+        if (cliente) {
+          // Usuario encontrado, redirige a la ruta "/catalog"
+          this.$router.push('/catalog');
+        } else {
+          // Usuario no encontrado, muestra un mensaje de error
+          this.error = 'Usuario no registrado';
+        }
+      } catch (error) {
+        // Maneja cualquier error
+        console.error('Error al cargar los datos de usuarios:', error);
+        this.error = 'Error al cargar los datos de usuarios. Por favor, inténtalo de nuevo más tarde.';
+      }
+    }
+
   }
 }
-
 </script>
 
 <style scoped>
