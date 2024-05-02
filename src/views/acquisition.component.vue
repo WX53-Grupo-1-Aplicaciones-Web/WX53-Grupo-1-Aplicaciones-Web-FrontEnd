@@ -104,6 +104,9 @@ export default{
     this.getProductDetail(this.$route.params.id);
     this.parameters['selectedTamanio'] = this.$route.params.selectedTamanio;
     this.parameters['parameter'] = this.$route.params.parameter;
+    if (this.$route.params.parameters) {
+      this.parameters = this.$route.params.parameters;
+    }
   },
 }
 

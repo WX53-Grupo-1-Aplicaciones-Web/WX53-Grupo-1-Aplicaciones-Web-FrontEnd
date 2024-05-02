@@ -14,6 +14,7 @@ export default {
       tamanios: [],
       selectedTamanio: null,
       parameter: null,
+      parameters:{},
       showErrorMessage: false,
     };
   },
@@ -43,15 +44,16 @@ export default {
         this.showErrorMessage = true;
       } else {
         console.log('hay parametros');
+
         this.showErrorMessage = false;
-        this.$router.push(`/acquisition/${productId}`);
         this.$router.push({
-          name: 'Acquisition',
+          name: 'Acquisition', // The name of the route for the acquisition component
           params: {
             id: productId,
             selectedTamanio: this.selectedTamanio,
-            parameter: this.parameter
-          }
+            parameter: this.parameter,
+            parameters: this.parameters,
+          },
         });
       }
     },

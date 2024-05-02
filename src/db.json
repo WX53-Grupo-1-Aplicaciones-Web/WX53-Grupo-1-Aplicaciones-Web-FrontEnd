@@ -136,6 +136,34 @@
       "product": "Mate Burilado",
       "parameters": {},
       "price": 35
+    },
+    {
+      "id": "5eb9",
+      "productId": "prd02",
+      "product": "Miel de abeja  ",
+      "parameters": {},
+      "price": 25
+    },
+    {
+      "id": "c295",
+      "productId": "prd01",
+      "product": "Mate Burilado",
+      "parameters": {},
+      "price": 50
+    },
+    {
+      "id": "e585",
+      "productId": "prd02",
+      "product": "Miel de abeja  ",
+      "parameters": {},
+      "price": 20
+    },
+    {
+      "id": "7a30",
+      "productId": "prd02",
+      "product": "Miel de abeja  ",
+      "parameters": {},
+      "price": 50
     }
   ]
 }
