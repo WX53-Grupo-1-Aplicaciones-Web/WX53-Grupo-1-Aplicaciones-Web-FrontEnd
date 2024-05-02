@@ -89,4 +89,13 @@ async saveProducto(data) {
       throw error;
     }
   }
+  async saveProductoAux(data) {
+    try {
+      const response = await this.http.post('producto_aux', data);
+      return response.data;
+    } catch (error) {
+      console.error('Error saving product:', error);
+      throw error;
+    }
+  }
 }
