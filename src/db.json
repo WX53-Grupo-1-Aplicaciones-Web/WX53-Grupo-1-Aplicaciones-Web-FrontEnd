@@ -164,6 +164,20 @@
       "product": "Miel de abeja  ",
       "parameters": {},
       "price": 50
+    },
+    {
+      "id": "28da",
+      "productId": "prd02",
+      "product": "Miel de abeja  ",
+      "parameters": {},
+      "price": 27.5
+    },
+    {
+      "id": "a21a",
+      "productId": "prd01",
+      "product": "Mate Burilado",
+      "parameters": {},
+      "price": 16.5
     }
   ],
   "productos_caracteristicas": [
@@ -224,7 +238,38 @@
       "categoria": "artesano madera",
       "precio": 150,
       "descripcion": "pinocho con cara feliz"
+    },
+    {
+      "id": 0,
+      "color": [],
+      "tamaño": [],
+      "material": "",
+      "nombre": "producto 0",
+      "categoria": "Textiles y tejidos",
+      "precio": 25,
+      "descripcion": "descripcion del producto 0"
+    },
+    {
+      "id": 0,
+      "color": [
+        "rojo",
+        "verde",
+        "amarillo"
+      ],
+      "tamaño": [
+        "pequeño",
+        "mediano"
+      ],
+      "material": "madera"
+    },
+    {
+      "id": 0,
+      "color": [],
+      "tamaño": [],
+      "material": "",
+      "nombre": "",
+      "categoria": "",
+      "precio": null
     }
-    
   ]
 }

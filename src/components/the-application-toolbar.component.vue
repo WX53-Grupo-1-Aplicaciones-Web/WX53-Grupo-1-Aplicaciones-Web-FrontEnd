@@ -1,11 +1,18 @@
 <script>
+  export default {
+    methods: {
+      navigateToCatalog() {
+        this.$router.push('/catalog');
+      },
+    }
+  }
 </script>
 <template>
   <div class="toolbar">
     <img src="../images/logoArtisania.png" alt="Logo" class="logo">
     <div class="circle-container">
       <div class="circle">
-        <img src="../images/homeIcon.png" alt="Home" class="icon">
+        <img  src="../images/homeIcon.png" alt="Home" class="icon" @click="navigateToCatalog">
       </div>
       <div class="circle">
         <img src="../images/cartIcon.png" alt="Cart" class="icon">
@@ -53,5 +60,6 @@
 .icon {
   max-width: 80%;
   max-height: 80%;
+  cursor: pointer;
 }
 </style>

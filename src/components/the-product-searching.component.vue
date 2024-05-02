@@ -1,6 +1,6 @@
 <template>
   <div class="search-bar">
-    <span class="publish" @mouseover="underline" @mouseleave="removeUnderline">Publicar</span>
+    <span class="publish" @mouseover="underline" @mouseleave="removeUnderline" @click="navigateToPublication">Publicar</span>
     <input type="text" class="search-input" placeholder="Buscar..." />
     <img src="@/images/searchIcon.png" alt="Search" class="search-icon" />
   </div>
@@ -15,6 +15,9 @@ export default {
     },
     removeUnderline(event) {
       event.target.style.textDecoration = 'none';
+    },
+    navigateToPublication() {
+      this.$router.push('/publication');
     }
   }
 }
