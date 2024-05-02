@@ -7,31 +7,31 @@
     <div class="login-wrapper">
       <div class="login-form">
         <div class="login-header">
-          <h2>Crea tu cuenta</h2>
+          <h2>{{ $t('register.title') }}</h2>
         </div>
 
         <form @submit.prevent="handleSubmit">
           <div class="form-group">
-            <label for="email">Correo electrónico:</label>
+            <label for="email">{{ $t('register.email') }}</label>
             <input type="email" id="email" v-model="email" required />
           </div>
 
           <div class="form-group">
-            <label for="user">Usuario:</label>
+            <label for="user">{{ $t('register.user') }}</label>
             <input type="text" id="user" v-model="user" required />
           </div>
 
           <div class="form-group">
-            <label for="password">Contraseña:</label>
+            <label for="password">{{ $t('register.password') }}</label>
             <input type="password" id="password" v-model="password" required />
           </div>
 
           <div class="form-group">
-            <label for="password"> Confirmar contraseña:</label>
-            <input type="password" id="password" v-model="password" required />
+            <label for="confirmPassword">{{ $t('register.Cpassword') }}</label>
+            <input type="password" id="confirmPassword" v-model="confirmPassword" required />
           </div>
 
-          <button type="submit">Registrarse</button>
+          <button type="submit">{{ $t('register.register') }}</button>
         </form>
       </div>
     </div>
@@ -45,12 +45,73 @@
 <script>
 import LoginToolbar from '@/components/toolbar-login.component.vue'
 import Footer from '@/components/the-footer.component.vue'
+
 export default {
   name: 'TheRegister',
   components: {
     LoginToolbar,
     Footer,
-  }
+  },
+  data() {
+    return {
+      email: '',
+      user: '',
+      password: '',
+      confirmPassword: '',
+      clientes: []
+    };
+  },
+
+  methods: {
+    handleSubmit() {
+      // Verificar si las contraseñas coinciden
+      if (this.password !== this.confirmPassword) {
+        alert('Las contraseñas no coinciden');
+        return;
+      }
+
+      // Crear un nuevo cliente
+      const nuevoCliente = {
+        email: this.email,
+        usuario: this.user,
+        contraseña: this.password,
+      };
+
+      // Obtener el contenido actual del archivo db.json
+      fetch('src/db.json')
+        .then(response => response.json())
+        .then(data => {
+          // Agregar el nuevo cliente a la lista de clientes
+          data.clientes.push(nuevoCliente);
+
+          // Convertir los datos actualizados de vuelta a JSON
+          const newData = JSON.stringify(data);
+
+          // Enviar los datos actualizados de vuelta al servidor
+          return fetch('/db.json', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: newData,
+          });
+        })
+        .then(() => {
+          // Limpiar los campos del formulario después de agregar el cliente
+          this.email = '';
+          this.user = '';
+          this.password = '';
+          this.confirmPassword = '';
+          alert('Registro exitoso');
+          // Redirigir a la página de inicio de sesión u otra página apropiada
+          this.$router.push('/');
+        })
+        .catch(error => {
+          console.error('Error al agregar el nuevo usuario:', error);
+          alert('Error al registrar el usuario');
+        });
+    },
+  },
 }
 
 </script>
@@ -122,5 +183,10 @@ button {
   cursor: pointer;
   margin-top: 10px;
   border-radius: 50px;
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 20px;
 }
 </style>
