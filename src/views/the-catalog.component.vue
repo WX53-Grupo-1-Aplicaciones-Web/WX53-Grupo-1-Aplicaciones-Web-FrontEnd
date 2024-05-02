@@ -23,18 +23,21 @@
       <ProductCatalog></ProductCatalog>
     </div>
   </div>
+  <TheFooter/>
 </template>
 
 <script>
 import AppToolbar from '@/components/the-application-toolbar.component.vue'
 import SearchBar from '@/components/the-product-searching.component.vue'
 import ProductCatalog from '@/components/product-catalog.component.vue'
+import TheFooter from '@/components/the-footer.component.vue'
 export default {
   name: 'TheCatalog',
   components: {
     ProductCatalog,
     AppToolbar,
     SearchBar,
+    TheFooter
   }
 }
 
