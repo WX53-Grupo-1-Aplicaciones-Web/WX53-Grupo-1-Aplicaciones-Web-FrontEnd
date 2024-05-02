@@ -16,9 +16,11 @@ export default {
       <div class = "profile-picture">
         <img src="../images/profilePicture.png" alt="Foto de perfil">
       </div>
-      <button class = "icon-button">
-        <img src="../images/editIcon.png" alt="Ícono">
-      </button>
+      <router-link to="/profile_edit">
+        <button class = "icon-button">
+          <img src="../images/editIcon.png" alt="Ícono">
+        </button>
+      </router-link>
       <div class = "profile-text">
         <h2 class="personal-info">Información personal</h2>
         <label class="mail">Correo</label>
