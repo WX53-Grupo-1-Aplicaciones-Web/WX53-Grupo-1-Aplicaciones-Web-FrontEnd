@@ -5,7 +5,51 @@ const http = axios.create({
 });
 
 export class ProductApiServices {
-  async getAll() {
-    return await http.get('productos');
+  constructor() {
+    this.http = http; 
   }
+
+  async publishProduct(productData) {
+    try {
+      const response = await this.http.post('producto_publicado', productData);
+      return response.data;
+    } catch (error) {
+      console.error('Error al publicar el producto:', error);
+      throw error;
+    }
+  }
+
+
+
+async getProductCategories() {
+  try {
+    const response = await this.http.get('productos_caracteristicas');
+    return response.data[0].categoria;
+  } catch (error) {
+    console.error('Error fetching product categories:', error);
+    throw error; 
+  }
+}
+
+async getProductCharacteristics() {
+  try {
+    const response = await this.http.get('productos_caracteristicas');
+    return response.data[0]; 
+  } catch (error) {
+    console.error('Error fetching product characteristics:', error);
+    throw error;
+  }
+}
+
+
+
+async saveProducto(data) {
+  try {
+    const response = await this.http.post('producto_publicado', data);
+    return response.data;
+  } catch (error) {
+    console.error('Error saving product:', error);
+    throw error;
+  }
+}
 }
