@@ -165,5 +165,66 @@
       "parameters": {},
       "price": 50
     }
+  ],
+  "productos_caracteristicas": [
+    {
+      "color": [
+        "rojo",
+        "verde",
+        "amarillo",
+        "azul",
+        "anaranjado",
+        "morado",
+        "marron",
+        "celeste",
+        "negro",
+        "rosado"
+      ],
+      "tamaño": [
+        "pequeño",
+        "mediano",
+        "grande"
+      ],
+      "material": [
+        "madera",
+        "tela",
+        "ceramica",
+        "acero",
+        "vidrio",
+        "barro",
+        "cestería"
+      ],
+      "categoria": [
+        "Joyería artesanal",
+        "Textiles y tejidos",
+        "Cerámica y alfarería",
+        "Artesanía en madera",
+        "Artesanía en cuero",
+        "Arte visual",
+        "Cuidado personal",
+        "Juguetes",
+        "Decoración del hogar",
+        "Productos gastronómicos artesanales"
+      ]
+    }
+  ],
+  "producto_publicado": [
+    {
+      "id": 1,
+      "color": [
+        "rojo",
+        "verde"
+      ],
+      "tamaño": [
+        "grande",
+        "pequeño"
+      ],
+      "material": "madera",
+      "nombre": "picocho",
+      "categoria": "artesano madera",
+      "precio": 150,
+      "descripcion": "pinocho con cara feliz"
+    }
+    
   ]
 }
