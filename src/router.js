@@ -20,7 +20,7 @@ const routes = [
   { path: '/resetPassword', component: ResetPassword},
 
   { path: '/catalog', component: TheCatalog },
-  { path: '/parameters', component: Parameters },
+  { path: '/parameters',name: 'Parameters', component: Parameters },
   { path: '/acquisition/:id',name: 'Acquisition', component: Acquisition },
   { path: '/publication', component: PublicationProduct },
   { path: '/profile_information', component: TheProfileInformation },

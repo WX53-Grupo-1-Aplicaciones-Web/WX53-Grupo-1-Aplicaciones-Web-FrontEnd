@@ -67,7 +67,7 @@ data() {
     productOnSale: false, 
     allProductCharacteristics: { 
         color: [],
-        tamaño: [],
+        tamanio: [],
         material: ''
       }
   };
@@ -77,13 +77,13 @@ methods: {
   async redirectToParameters() {
     if (this.productOnSale) {
     const newProduct = {
-      id: 0, 
-      color: [], 
-      tamaño: [], 
-      material: '', 
+      id: "0",
+      color: [],
+      tamanio: [],
+      material: '',
       nombre: this.productName,
       categoria: this.category,
-      precio: parseFloat(this.productPrice), 
+      precio: parseFloat(this.productPrice),
       descripcion: this.productDescription
     };
 
@@ -120,7 +120,7 @@ methods: {
     precio: parseFloat(productData.precio),
     descripcion: productData.descripcion,
     color: productData.color,
-    tamaño: productData.tamaño,
+    tamanio: productData.tamanio,
     material: productData.material
   }));
 

@@ -18,6 +18,15 @@ export class ProductApiServices {
       throw error;
     }
   }
+  async getProduct(id) {
+    try {
+      const response = await this.http.get(`producto_publicado/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error getting product:', error);
+      throw error;
+    }
+  }
 
 
 
@@ -52,4 +61,13 @@ async saveProducto(data) {
     throw error;
   }
 }
+  async deleteProduct(id) {
+    try {
+      const response = await this.http.delete(`producto_publicado/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error deleting product:', error);
+      throw error;
+    }
+  }
 }

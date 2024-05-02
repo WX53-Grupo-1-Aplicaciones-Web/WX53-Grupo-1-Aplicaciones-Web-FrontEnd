@@ -8,15 +8,15 @@ export default {
     AppToolbar,
   },
   props: {
-    productCharacteristics: Object 
+    productCharacteristics: Object
   },
   data() {
     return {
       visible: false,
       showSizeSection: false,
       showMaterialSection: false,
-      tamaño: "",
-      tamaños: [],
+      tamanio: "",
+      tamanios: [],
       material: "",
       materiales: [],
       grabado: "",
@@ -33,7 +33,7 @@ export default {
   methods: {
     redirectToAdquisicion() {
       const router = useRouter();
-      router.push('/adquisicion'); 
+      router.push('/adquisicion');
     },
     toggleSection() {
       if (this.showSizeSection && !this.showMaterialSection) {
@@ -41,20 +41,29 @@ export default {
       } else {
         this.showSizeSection = true;
         this.showMaterialSection = true;
-      }      
+      }
     },
     async saveProducto() {
+      const productService = new ProductApiServices();
+      const product = await productService.getProduct("0");
+
       const updatedCharacteristics = {
-        id:0,
+
         color: this.color,
-        tamaño: this.tamaño,
-        material: this.material
+        tamanio: this.tamanio,
+        material: this.material,
+        nombre: product.nombre,
+        categoria: product.categoria,
+        precio: product.precio,
+        descripcion: product.descripcion
       };
 
       try {
         const productService = new ProductApiServices();
         await productService.saveProducto(updatedCharacteristics);
         this.$emit('save-success');
+        await productService.deleteProduct("0");
+
       } catch (error) {
         console.error('Error saving product:', error);
       }
@@ -67,7 +76,7 @@ export default {
 
       this.colors = characteristics.color;
       this.materiales = characteristics.material;
-      this.tamaños = characteristics.tamaño; 
+      this.tamanios = characteristics.tamanio;
     } catch (error) {
       console.error('Error fetching product characteristics:', error);
 
@@ -100,8 +109,8 @@ export default {
         </div>
 
         <div v-if="showSizeSection">
-          <label for="tamaño" class="font-bold block mb-2"> Tamaño</label>
-          <pv-multi-select  v-model="tamaño" display="chip" :options="tamaños"  placeholder="Seleccione el tamaño"
+          <label for="tamanio" class="font-bold block mb-2"> Tamaño</label>
+          <pv-multi-select  v-model="tamaño" display="chip" :options="tamanios"  placeholder="Seleccione el tamaño"
             :maxSelectedLabels="3"  class="input-width"/>
         </div>
 
