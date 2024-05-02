@@ -10,11 +10,11 @@
       </div>
 
       <div class = "phrase1">
-        <p>Conectando corazones con arte</p>
+        <p>{{ $t('footer.slogan1') }}</p>
       </div>
 
       <div class = "phrase2">
-        <p>hecho a mano</p>
+        <p>{{ $t('footer.slogan2') }}</p>
       </div>
     </div>
 </template>
