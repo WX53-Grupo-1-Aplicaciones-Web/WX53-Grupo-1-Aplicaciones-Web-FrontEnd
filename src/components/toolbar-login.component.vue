@@ -1,12 +1,14 @@
 <script>
 </script>
+
 <template>
   <div class="toolbar">
     <img src="../images/logoArtisania.png" alt="Logo" class="logo">
 
-    <button type="login">Iniciar sesión</button>
+    <pv-button type="login" onclick = " window.location.href = '/' ">{{ $t('loginToolbar.login')}}</pv-button>
 
-    <button type="register">Registrarse</button>
+
+    <pv-button type="register" onclick = " window.location.href = '/register' ">{{ $t('loginToolbar.register')}}</pv-button>
   </div>
 </template>
 
