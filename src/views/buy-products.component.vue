@@ -1,6 +1,6 @@
 <script>
 import AppToolbar from '@/components/the-application-toolbar.component.vue'
-import {ProductCatalogService} from '@/services/product_on_catalog.service.js'
+import {ProductCatalogService} from '@/services/the-product-on-catalog.service.js'
 
 export default {
   name: 'TheCatalog',
@@ -36,18 +36,14 @@ export default {
       this.$refs.op.toggle(event);
     },
     validateAndBuy(productId) {
-      console.log('selectedTamanio:', this.selectedTamanio);
-      console.log('parameter:', this.parameter);
 
       if (this.selectedTamanio === null || this.selectedTamanio === '' || this.parameter === null || this.parameter === '') {
-        console.log('faltan parametros');
         this.showErrorMessage = true;
       } else {
-        console.log('hay parametros');
 
         this.showErrorMessage = false;
         this.$router.push({
-          name: 'Acquisition', // The name of the route for the acquisition component
+          name: 'Acquisition',
           params: {
             id: productId,
             selectedTamanio: this.selectedTamanio,
@@ -106,7 +102,7 @@ export default {
         <template #subtitle>$ {{product.precio}}</template>
         <template #content>
           <div class="button-right">
-            <pv-button label="Comprar" class="w-full" style="margin-bottom: 10px;" @click="validateAndBuy(product.id)" />            <pv-button label="Personalizar producto" class="w-full" />
+            <pv-button label="Comprar" class="w-full" style="margin-bottom: 10px;" @click="validateAndBuy(product.id)" />
           </div>
         </template>
 

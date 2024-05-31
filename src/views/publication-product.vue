@@ -49,8 +49,7 @@
 
 <script>
 import AppToolbar from '@/components/the-application-toolbar.component.vue'
-import {ProductApiServices} from '@/services/cliente-products-api.service.js'
-
+import {ProductApiServices} from '@/services/the-product-client.service.js'
 export default {
 name: 'TheCatalog',
 components: {
@@ -110,12 +109,7 @@ methods: {
       this.chooseCategory = false; 
     }
   },
-  formatCurrency(event) {
-    let formattedValue = event.target.value.replace(/[^0-9.]/g, '');
-    formattedValue = formattedValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    formattedValue = formattedValue.replace(/^(\d*\.\d{2}).*$/, '$1');
-    this.productPrice = formattedValue;
-  },
+
 
   
   async publishProduct() {

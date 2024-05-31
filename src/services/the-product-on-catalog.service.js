@@ -40,4 +40,16 @@ export class ProductCatalogService {
       throw error;
     }
   }
+  async deleteAllProducts() {
+    try {
+      const response = await http.get('producto_publicado');
+      const products = response.data;
+      for (const product of products) {
+        await http.delete(`producto_publicado/${product.id}`);
+      }
+    } catch (error) {
+      console.error('Error al eliminar los productos:', error);
+      throw error;
+    }
+  }
 }

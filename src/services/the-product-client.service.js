@@ -54,7 +54,7 @@ async getProductCharacteristics() {
 
 async saveProducto(data) {
   try {
-    const response = await this.http.post('producto_publicado', data);
+    const response = await this.http.post('productos', data);
     return response.data;
   } catch (error) {
     console.error('Error saving product:', error);
@@ -94,7 +94,6 @@ async saveProducto(data) {
       const response = await this.http.post('producto_aux', data);
       return response.data;
     } catch (error) {
-      console.error('Error saving product:', error);
       throw error;
     }
   }

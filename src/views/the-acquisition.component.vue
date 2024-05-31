@@ -44,7 +44,7 @@
 <script>
 import AppToolbar from '@/components/the-application-toolbar.component.vue'
 import TheFooter from '@/components/the-footer.component.vue'
-import  {ProductCatalogService} from '@/services/product_on_catalog.service.js'
+import  {ProductCatalogService} from '@/services/the-product-on-catalog.service.js'
 
 export default{
   components: {
@@ -69,6 +69,10 @@ export default{
       };
   },
   methods: {
+
+    redirectToCatalog() {
+      this.$router.push('/catalog');
+    },
     async getProductDetail(id) {
       const service = new ProductCatalogService();
       this.product = await service.getProductDetail(id);
@@ -84,7 +88,6 @@ export default{
       const service = new ProductCatalogService();
       try {
         const response = await service.createBill(billDetails);
-        console.log(response); // Imprime la respuesta para verificar que la boleta se creó correctamente
       } catch (error) {
         console.error('Error al crear la boleta', error);
       }
@@ -96,7 +99,7 @@ export default{
       } else {
         this.showCheckboxErrorMessage = false;
         this.createBill();
-        // Aquí puedes agregar el código para continuar con la operación
+        this.redirectToCatalog();
       }
     },
   },

@@ -1,7 +1,7 @@
 <script>
 import { useRouter } from 'vue-router';
-import { ProductApiServices } from '@/services/cliente-products-api.service.js'
-import {ProductCatalogService} from '@/services/product_on_catalog.service.js'
+import { ProductApiServices } from '@/services/the-product-client.service.js'
+import {ProductCatalogService} from '@/services/the-product-on-catalog.service.js'
 import AppToolbar from '@/components/the-application-toolbar.component.vue'
 export default {
   name: "personalizar-card",
@@ -33,6 +33,15 @@ export default {
     };
   },
   methods: {
+    saveAndRedirect() {
+      this.saveProducto();
+      this.redirectToCatalog();
+    },
+    redirectToCatalog() {
+      setTimeout(() => {
+        this.$router.push('/catalog');
+      }, 250);
+    },
     redirectToAdquisicion() {
       const router = useRouter();
       router.push('/adquisicion');
@@ -62,17 +71,9 @@ export default {
       };
 
       try {
-        const publishedProducts = await productService.getPublishedProducts();
-        await productService.deleteProduct("0");
+        catalogService.addProduct(updatedCharacteristics);
 
-
-
-        await productService.saveProducto(updatedCharacteristics);
         this.$emit('save-success');
-        for (const publishedProduct of publishedProducts) {
-          await catalogService.addProduct(publishedProduct);
-
-        }
       } catch (error) {
         console.error('Error saving product:', error);
       }
@@ -135,7 +136,7 @@ export default {
 </div>
 
 <div class="button-container">
-  <pv-button @click="saveProducto"  label="Publicar"></pv-button>
+  <pv-button @click="saveAndRedirect"  label="Publicar"></pv-button>
 </div>
 
 </template>

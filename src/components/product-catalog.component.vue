@@ -1,5 +1,5 @@
 <script>
-import { ProductCatalogService } from '@/services/product_on_catalog.service.js'
+import { ProductCatalogService } from '@/services/the-product-on-catalog.service.js'
 export default {
   name: 'ProductCatalog',
   data() {

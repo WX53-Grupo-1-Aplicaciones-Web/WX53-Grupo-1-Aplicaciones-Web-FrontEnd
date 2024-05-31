@@ -7,17 +7,21 @@
 </template>
 
 <script>
+import { ProductCatalogService } from '@/services/the-product-on-catalog.service.js';
 export default {
   name: 'SearchBar',
   methods: {
     underline(event) {
       event.target.style.textDecoration = 'underline';
     },
-    removeUnderline(event) {
-      event.target.style.textDecoration = 'none';
-    },
-    navigateToPublication() {
-      this.$router.push('/publication');
+    async navigateToPublication() {
+      try {
+        const productService = new ProductCatalogService();
+        const response = await productService.deleteAllProducts();
+        this.$router.push('/publication');
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 }

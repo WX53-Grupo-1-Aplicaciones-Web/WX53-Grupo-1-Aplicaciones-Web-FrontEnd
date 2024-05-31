@@ -43,8 +43,7 @@
 <script>
 import LoginToolbar from '@/components/toolbar-login.component.vue'
 import Footer from '@/components/the-footer.component.vue'
-import dbData from '/src/db.json'
-
+import dbData from '@/server/db.json'
 export default {
   name: 'TheLogin',
   components: {
@@ -55,27 +54,21 @@ export default {
     return {
       email: '',
       password: '',
-      error: '' // Agrega una propiedad para almacenar el mensaje de error
+      error: ''
     };
   },
   methods: {
     async handleSubmit() {
       try {
-        // Accede a los datos del archivo JSON importado
         const clientes = dbData.clientes;
-
-        // Busca el usuario en la lista de clientes
         const cliente = clientes.find(cliente => cliente.correo === this.email && cliente.contraseña === this.password);
 
         if (cliente) {
-          // Usuario encontrado, redirige a la ruta "/catalog"
           this.$router.push('/catalog');
         } else {
-          // Usuario no encontrado, muestra un mensaje de error
           this.error = 'Usuario no registrado';
         }
       } catch (error) {
-        // Maneja cualquier error
         console.error('Error al cargar los datos de usuarios:', error);
         this.error = 'Error al cargar los datos de usuarios. Por favor, inténtalo de nuevo más tarde.';
       }

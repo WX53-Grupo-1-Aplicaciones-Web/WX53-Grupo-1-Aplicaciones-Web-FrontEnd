@@ -2,7 +2,7 @@
 import AppToolbar from '@/components/the-application-toolbar.component.vue'
 import SearchBar from '@/components/the-product-searching.component.vue'
 import TheFooter from '@/components/the-footer.component.vue'
-import { ProductCatalogService } from '@/services/product_on_catalog.service.js'
+import { ProductCatalogService } from '@/services/the-product-on-catalog.service.js'
 
 export default {
   name: 'TheProductDetail',
@@ -70,7 +70,7 @@ export default {
         <div class="product-actions">
           <p class="product-price">Precio: ${{product.precio}}</p>
           <button class="buy-button" @click="goToBuyProduct(product.id)">Comprar</button>
-          <button class="customize-button">Personalizar producto</button>
+          <button class="customize-button" @click="goToBuyProduct(product.id)">Personalizar producto</button>
         </div>
       </div>
     </div>

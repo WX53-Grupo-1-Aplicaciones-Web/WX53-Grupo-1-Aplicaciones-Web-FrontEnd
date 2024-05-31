@@ -64,30 +64,24 @@ export default {
 
   methods: {
     handleSubmit() {
-      // Verificar si las contraseñas coinciden
       if (this.password !== this.confirmPassword) {
         alert('Las contraseñas no coinciden');
         return;
       }
 
-      // Crear un nuevo cliente
       const nuevoCliente = {
         email: this.email,
         usuario: this.user,
         contraseña: this.password,
       };
 
-      // Obtener el contenido actual del archivo db.json
       fetch('src/db.json')
         .then(response => response.json())
         .then(data => {
-          // Agregar el nuevo cliente a la lista de clientes
           data.clientes.push(nuevoCliente);
 
-          // Convertir los datos actualizados de vuelta a JSON
           const newData = JSON.stringify(data);
 
-          // Enviar los datos actualizados de vuelta al servidor
           return fetch('/db.json', {
             method: 'POST',
             headers: {
@@ -97,13 +91,11 @@ export default {
           });
         })
         .then(() => {
-          // Limpiar los campos del formulario después de agregar el cliente
           this.email = '';
           this.user = '';
           this.password = '';
           this.confirmPassword = '';
           alert('Registro exitoso');
-          // Redirigir a la página de inicio de sesión u otra página apropiada
           this.$router.push('/');
         })
         .catch(error => {
