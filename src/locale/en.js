@@ -116,6 +116,12 @@ const en = {
     buy: 'Buy',
     customize: 'Customize',
     price: ' Price: $',
+    product_detail: 'Product Details',
+
+  },
+  navbar:{
+    publish: 'Publish',
+    search: 'Search',
   }
 }
 

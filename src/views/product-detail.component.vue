@@ -48,14 +48,14 @@ export default {
       </div>
       <div class="product-info">
         <div class="author-info">
-          <h2>Hecho por <span class="author-name">{{product.autor}}  </span></h2>
+          <h2>{{ $t('detail.author') }} <span class="author-name">{{product.autor}}  </span></h2>
           <div class="author-details">
             <img class="author-image" src="../images/craftermanProfile.png" alt="Imagen del autor">
           </div>
         </div>
         <p class="author-description">{{product.detalles_del_artesano}}</p>
         <div class="product-details">
-          <h3>Detalles del producto</h3>
+          <h3>{{ $t('detail.product_detail') }}</h3>
           <ul>
             <li>{{ product.caracteristicas[0].caracteristica_1 }}</li>
             <li>{{ product.caracteristicas[1].caracteristica_2 }}</li>
@@ -68,9 +68,9 @@ export default {
       </div>
       <div class="product-info">
         <div class="product-actions">
-          <p class="product-price">Precio: ${{product.precio}}</p>
-          <button class="buy-button" @click="goToBuyProduct(product.id)">Comprar</button>
-          <button class="customize-button" @click="goToBuyProduct(product.id)">Personalizar producto</button>
+          <p class="product-price">{{ $t('detail.price') }} {{product.precio}}</p>
+          <button class="buy-button" @click="goToBuyProduct(product.id)">{{ $t('detail.buy') }}</button>
+          <button class="customize-button" @click="goToBuyProduct(product.id)">{{ $t('detail.customize') }}</button>
         </div>
       </div>
     </div>

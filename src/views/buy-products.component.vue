@@ -70,17 +70,17 @@ export default {
         <template #header>
           <img  v-if="product" alt="user header" :src="'/'+product.imagen" style="width: 300px; height: auto; margin-right: 20px;" />
         </template>
-        <template #title><strong>¡Este producto puede personalizarse!</strong></template>
+        <template #title><strong>{{ $t('buy.tittle') }}</strong></template>
         <template #content>
           <div class="content-container">
-            <p>Elije los cambios personalizados por defecto para este producto</p>
+            <p>{{ $t('buy.subtittle') }}</p>
           </div>
           <div class="input-container">
             <label for="color" class="input-label" >{{ Object.keys(product.parametros_personalizacion)[0] }}</label>
             <pv-dropdown v-model="parameter" :options="product.parametros_personalizacion[Object.keys(product.parametros_personalizacion)[0]]" :placeholder="product.input_text" class="input-field" />
           </div>
           <div class="radio-container flex flex-column gap-3">
-            <label for="tamanios" class="input-label">Tamaño</label>
+            <label for="tamanios" class="input-label">{{ $t('buy.size') }}</label>
             <div v-for="tamanio in tamanios" :key="tamanio" class="flex flex-row align-items-center">
               <pv-radio-button v-model="selectedTamanio" :inputId="tamanio" :value="tamanio" />
               <label :for="tamanio" class="ml-2">{{ tamanio }}</label>
@@ -98,7 +98,7 @@ export default {
       <pv-card class="second-card" style="width: 20%;" v-if="product">
         <template #header>
         </template>
-        <template #title>Precio</template>
+        <template #title>{{ $t('buy.price') }}</template>
         <template #subtitle>$ {{product.precio}}</template>
         <template #content>
           <div class="button-right">
@@ -109,7 +109,7 @@ export default {
         <template #footer>
           <div class="flex flex-column items-center gap-3 mt-1">
             <img alt="user header" src="https://i.pinimg.com/736x/86/cf/a7/86cfa7e4db63b79deb6c11beaeb1fd1b.jpg" style="width: 100px; height: auto; margin-right: 20px;" />
-            <p><strong>Autor:</strong> {{product.autor}}</p>
+            <p><strong>{{ $t('buy.author') }}</strong> {{product.autor}}</p>
           </div>
         </template>
       </pv-card>
@@ -150,20 +150,20 @@ export default {
 }
 .card-container {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
 .card-container > * {
-    width: 48%; 
-    padding: 20px; 
+    width: 48%;
+    padding: 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
 }
 
 .card-container{
-    justify-content: space-between; 
-    height: 100%; 
+    justify-content: space-between;
+    height: 100%;
 }
 .card {
   display: flex;
@@ -192,7 +192,7 @@ export default {
 
 .radio-container .flex-row {
     margin-bottom: 10px;
-    margin-top: 10px; 
+    margin-top: 10px;
 }
 
 .message-container {
@@ -208,14 +208,14 @@ export default {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   width: 300%;
-  background-color: #116BC7; 
-  color: #ffffff; 
+  background-color: #116BC7;
+  color: #ffffff;
   border-color: #116BC7;
 }
 
 .button-right .w-full {
-  background-color: #116BC7; 
-  color: #ffffff; 
-  border-color: #000; 
+  background-color: #116BC7;
+  color: #ffffff;
+  border-color: #000;
 }
 </style>

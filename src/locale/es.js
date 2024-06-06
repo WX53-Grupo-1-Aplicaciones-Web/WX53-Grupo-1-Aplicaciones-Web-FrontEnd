@@ -116,6 +116,11 @@ const es = {
     buy: 'Comprar',
     customize: 'Personalizar',
     price: ' Precio: $',
+    product_detail: 'Detalles del producto',
+  },
+  navbar:{
+    publish: 'Publicar',
+    search: 'Buscar',
   }
 }
 

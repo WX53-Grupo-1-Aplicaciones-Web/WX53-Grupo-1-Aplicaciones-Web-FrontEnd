@@ -1,7 +1,7 @@
 <template>
   <div class="search-bar">
-    <span class="publish" @mouseover="underline" @mouseleave="removeUnderline" @click="navigateToPublication">Publicar</span>
-    <input type="text" class="search-input" placeholder="Buscar..." />
+    <span class="publish" @mouseover="underline" @mouseleave="removeUnderline" @click="navigateToPublication">{{ $t('navbar.publish') }}</span>
+    <input type="text" class="search-input" :placeholder="searchPlaceholder" />
     <img src="@/images/searchIcon.png" alt="Search" class="search-icon" />
   </div>
 </template>
@@ -10,6 +10,11 @@
 import { ProductCatalogService } from '@/services/the-product-on-catalog.service.js';
 export default {
   name: 'SearchBar',
+  computed: {
+    searchPlaceholder() {
+      return this.$t('navbar.search');
+    }
+  },
   methods: {
     underline(event) {
       event.target.style.textDecoration = 'underline';

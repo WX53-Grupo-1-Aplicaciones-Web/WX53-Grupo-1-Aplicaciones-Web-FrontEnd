@@ -6,17 +6,17 @@
   </div>
   <div class="catalog-container">
     <div class="categories">
-      <h2>Categorías</h2>
-      <div><span>Joyería artesanal</span></div>
-      <div><span>Textiles y tejidos</span></div>
-      <div><span>Cerámica y alfarería</span></div>
-      <div><span>Artesanía en madera</span></div>
-      <div><span>Artesanía en cuero</span></div>
-      <div><span>Arte visual</span></div>
-      <div><span>Cuidado personal</span></div>
-      <div><span>Juguetes</span></div>
-      <div><span>Decoración del hogar</span></div>
-      <div><span>Productos gastronómicos artesanales</span></div>
+      <h2>{{ $t('catalog.categori') }}</h2>
+      <div><span>{{ $t('catalog.joyeria') }}</span></div>
+      <div><span>{{ $t('catalog.textil') }}</span></div>
+      <div><span>{{ $t('catalog.ceramica') }}</span></div>
+      <div><span>{{ $t('catalog.artesania') }}</span></div>
+      <div><span>{{ $t('catalog.artecuero') }}</span></div>
+      <div><span>{{ $t('catalog.artevi') }}</span></div>
+      <div><span>{{ $t('catalog.cuidadoper') }}</span></div>
+      <div><span>{{ $t('catalog.juguet') }}</span></div>
+      <div><span>{{ $t('catalog.decora') }}</span></div>
+      <div><span>{{ $t('catalog.progastro') }}</span></div>
     </div>
 
     <div class="products">

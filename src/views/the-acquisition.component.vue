@@ -7,19 +7,19 @@
       <img alt="user header" :src="'/'+product.imagen" />
   </template>
   
-  <template #title><strong>Confirmacion del acuerdo de personalizacion</strong></template>
-  <template #subtitle>El cliente recibira el producto con los siguientes detalles de personalizacion:</template>
+  <template #title><strong>{{ $t('acquisition.tittle') }}</strong></template>
+  <template #subtitle>{{ $t('acquisition.subtittle') }}</template>
   <pv-divider layout="vertical" />
   
   <template #content class="information-product bordered-section">
-      <p>El precio acordado por ambas partes es el siguiente:</p>
+      <p>{{ $t('acquisition.price') }}</p>
       <pv-input-number v-model="value1" inputId="currency-us" mode="currency" currency="USD" locale="en-US" />
       
       <div class="card flex justify-content-center">
       <div class="flex flex-column gap-3">
           <div v-for="category of categories" :key="category.key" class="flex align-items-center">
               <pv-checkbox v-model="selectedCategories" :inputId="category.key" name="category" :value="category.name" />
-              <label :for="category.key">Yo, {{ category.name }}  confirmo el acuerdo</label>
+              <label :for="category.key">{{ $t('acquisition.confirm1') }}, {{ category.name }}  confirmo el acuerdo</label>
           </div>
       </div>
   </div>
