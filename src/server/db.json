@@ -81,6 +81,13 @@
       "parameters": {},
       "price": 60,
       "id": "bOrG5-9"
+    },
+    {
+      "productId": "prd01",
+      "product": "Mate Burilado",
+      "parameters": {},
+      "price": 50,
+      "id": "oWj6YFD"
     }
   ],
   "productos_caracteristicas": [
@@ -125,7 +132,19 @@
       ]
     }
   ],
-  "producto_publicado": [],
+  "producto_publicado": [
+    {
+      "id": "0",
+      "color": [],
+      "tamanio": [],
+      "material": "",
+      "nombre": "Estatuillas ",
+      "categoria": "Cerámica y alfarería",
+      "imagen": "https://www.memoriachilena.gob.cl/602/articles-70975_thumbnail.jpg",
+      "precio": 40,
+      "descripcion": "Descripcion del producto"
+    }
+  ],
   "productos": [
     {
       "id": "prd01",
@@ -228,6 +247,27 @@
           "caracteristica_5": "Contiene todos los componentes de la mierl rela: polen, propóleo, cera, jalea real, enzimas vivas."
         }
       ]
+    },
+    {
+      "color": [
+        "rojo",
+        "verde",
+        "amarillo",
+        "azul",
+        "anaranjado"
+      ],
+      "tamanio": [
+        "pequeño",
+        "mediano",
+        "grande"
+      ],
+      "material": "ceramica",
+      "nombre": "Estatuillas ",
+      "categoria": "Cerámica y alfarería",
+      "precio": 40,
+      "imagen": "https://www.memoriachilena.gob.cl/602/articles-70975_thumbnail.jpg",
+      "descripcion": "Descripcion del producto",
+      "id": "ibHIH9e"
     }
   ]
 }

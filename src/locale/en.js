@@ -9,6 +9,9 @@ const en = {
     registerLink: 'Register',
     forgotPasswordLink: 'Forgot your password?'
   },
+  product:{
+    product:'Product'
+  },
 
   loginToolbar:{
     login: 'Log-in',

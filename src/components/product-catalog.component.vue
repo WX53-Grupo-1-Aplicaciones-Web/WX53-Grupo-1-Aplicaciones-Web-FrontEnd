@@ -25,7 +25,7 @@ export default {
     <div class="product-info">
       <h2 class="product-name">{{ product.nombre }}</h2>
       <p class="product-description">{{ product.descripcion }}</p>
-      <div class="product-price" @click="goToProductDetail(product.id)">Precio: ${{ product.precio }}</div>
+      <div class="product-price" @click="goToProductDetail(product.id)">{{ $t('product.product') }}: ${{ product.precio }}</div>
     </div>
   </div>
 </template>
