@@ -31,6 +31,11 @@
             <input type="password" id="confirmPassword" v-model="confirmPassword" required />
           </div>
 
+          <div class="checkboxgroup">
+            <label for="isArtisan">{{ $t('register.isArtisan') }}</label>
+            <input type="checkbox" id="isArtisan" v-model="isArtisan" />
+          </div>
+
           <button type="submit">{{ $t('register.register') }}</button>
         </form>
       </div>
@@ -45,6 +50,7 @@
 <script>
 import LoginToolbar from '@/components/toolbar-login.component.vue'
 import Footer from '@/components/the-footer.component.vue'
+import TheRegisterService from '@/services/the-register.service';
 
 export default {
   name: 'TheRegister',
@@ -58,6 +64,7 @@ export default {
       user: '',
       password: '',
       confirmPassword: '',
+      isArtisan: false,
       clientes: []
     };
   },
@@ -73,28 +80,16 @@ export default {
         email: this.email,
         usuario: this.user,
         contraseña: this.password,
+        isArtisan: this.isArtisan,
       };
 
-      fetch('src/db.json')
-        .then(response => response.json())
-        .then(data => {
-          data.clientes.push(nuevoCliente);
-
-          const newData = JSON.stringify(data);
-
-          return fetch('/db.json', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: newData,
-          });
-        })
+      TheRegisterService.add(nuevoCliente)
         .then(() => {
           this.email = '';
           this.user = '';
           this.password = '';
           this.confirmPassword = '';
+          this.isArtisan = false;
           alert('Registro exitoso');
           this.$router.push('/');
         })
@@ -181,4 +176,22 @@ button {
   text-align: center;
   margin-top: 20px;
 }
+.checkboxgroup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkboxgroup label {
+  margin-left: 35%;
+}
+
+.checkboxgroup input[type="checkbox"] {
+  margin-left: -50%;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
 </style>

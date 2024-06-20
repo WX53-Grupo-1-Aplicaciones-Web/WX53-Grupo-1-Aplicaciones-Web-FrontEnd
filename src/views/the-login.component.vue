@@ -61,7 +61,7 @@ export default {
     async handleSubmit() {
       try {
         const clientes = dbData.clientes;
-        const cliente = clientes.find(cliente => cliente.correo === this.email && cliente.contraseña === this.password);
+        const cliente = clientes.find(cliente => cliente.email === this.email && cliente.contraseña === this.password);
 
         if (cliente) {
           this.$router.push('/catalog');

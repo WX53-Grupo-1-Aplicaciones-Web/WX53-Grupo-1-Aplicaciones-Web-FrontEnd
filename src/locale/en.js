@@ -29,7 +29,8 @@ const en = {
     user: 'User:',
     password: 'Password:',
     Cpassword: 'Confirm password:',
-    register: 'Sign-up'
+    register: 'Sign-up',
+    isArtisan: 'Are you an artisan?'
   },
 
   passchange: {

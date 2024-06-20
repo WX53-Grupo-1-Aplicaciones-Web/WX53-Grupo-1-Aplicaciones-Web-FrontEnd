@@ -1,28 +1,18 @@
 {
   "clientes": [
     {
-      "usuario": "DavidW",
-      "contraseña": "contraseña123",
-      "correo": "david.willams@user.com",
-      "imagen_usuario": "src/images/davidWilliams.png"
+      "email": "abc@upc.edu.pe",
+      "usuario": "user1",
+      "contraseña": "1234567",
+      "isArtisan": true,
+      "id": 1
     },
     {
-      "usuario": "LeonidasOr",
-      "contraseña": "clave456",
-      "correo": "leo.orellana@user.com",
-      "imagen_usuario": "src/images/LeoOrellana.png"
-    },
-    {
-      "usuario": "CeciliaVal",
-      "contraseña": "miclave",
-      "correo": "cecilia.valenzuela@user.com",
-      "imagen_usuario": "ruta/imagen3.jpg"
-    },
-    {
-      "usuario": "JoaquinPard",
-      "contraseña": "123456",
-      "correo": "magnate456@user.com",
-      "imagen_usuario": "ruta/imagen4.jpg"
+      "email": "abcs@upc.edu.pe",
+      "usuario": "user2",
+      "contraseña": "1234",
+      "isArtisan": false,
+      "id": 2
     }
   ],
   "boletas": [

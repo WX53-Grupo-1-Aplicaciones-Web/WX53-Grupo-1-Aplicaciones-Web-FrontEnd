@@ -29,7 +29,8 @@ const es = {
     user: 'Usuario:',
     password: 'Contraseña:',
     Cpassword: 'Confirmar Contraseña:',
-    register: 'Registrarse'
+    register: 'Registrarse',
+    isArtisan: '¿Eres un artesano?'
   },
 
   passchange: {
