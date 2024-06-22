@@ -43,7 +43,8 @@
 <script>
 import LoginToolbar from '@/components/toolbar-login.component.vue'
 import Footer from '@/components/the-footer.component.vue'
-import dbData from '@/server/db.json'
+import TheLoginBackendService from '@/services/the-login-backend.service.js'
+
 export default {
   name: 'TheLogin',
   components: {
@@ -60,20 +61,19 @@ export default {
   methods: {
     async handleSubmit() {
       try {
-        const clientes = dbData.clientes;
-        const cliente = clientes.find(cliente => cliente.email === this.email && cliente.contraseña === this.password);
+        const token = await TheLoginBackendService.login(this.email, this.password);
 
-        if (cliente) {
+        if (token) {
+          localStorage.setItem('userToken', token);
           this.$router.push('/catalog');
         } else {
           this.error = 'Usuario no registrado';
         }
       } catch (error) {
-        console.error('Error al cargar los datos de usuarios:', error);
-        this.error = 'Error al cargar los datos de usuarios. Por favor, inténtalo de nuevo más tarde.';
+        console.error('Error al hacer login:', error);
+        this.error = 'Error al hacer login. Por favor, inténtalo de nuevo más tarde.';
       }
     }
-
   }
 }
 </script>

@@ -50,7 +50,7 @@
 <script>
 import LoginToolbar from '@/components/toolbar-login.component.vue'
 import Footer from '@/components/the-footer.component.vue'
-import TheRegisterService from '@/services/the-register.service';
+import TheRegisterBackendService from '@/services/the-register-backend.service.js'
 
 export default {
   name: 'TheRegister',
@@ -76,29 +76,17 @@ export default {
         return;
       }
 
-      const nuevoCliente = {
-        email: this.email,
-        usuario: this.user,
-        contraseña: this.password,
-        isArtisan: this.isArtisan,
-      };
-
-      TheRegisterService.add(nuevoCliente)
+      TheRegisterBackendService.register(this.user, this.password, this.email, this.isArtisan)
         .then(() => {
-          this.email = '';
-          this.user = '';
-          this.password = '';
-          this.confirmPassword = '';
-          this.isArtisan = false;
           alert('Registro exitoso');
           this.$router.push('/');
         })
         .catch(error => {
-          console.error('Error al agregar el nuevo usuario:', error);
-          alert('Error al registrar el usuario');
+          console.error('Error al registrar el usuario:', error);
+          alert('Error al registrar el usuario. Por favor, inténtalo de nuevo más tarde.');
         });
     },
-  },
+  }
 }
 
 </script>
