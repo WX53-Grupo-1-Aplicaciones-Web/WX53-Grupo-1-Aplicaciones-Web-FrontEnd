@@ -122,19 +122,7 @@
       ]
     }
   ],
-  "producto_publicado": [
-    {
-      "id": "0",
-      "color": [],
-      "tamanio": [],
-      "material": "",
-      "nombre": "Estatuillas ",
-      "categoria": "Cerámica y alfarería",
-      "imagen": "https://www.memoriachilena.gob.cl/602/articles-70975_thumbnail.jpg",
-      "precio": 40,
-      "descripcion": "Descripcion del producto"
-    }
-  ],
+  "producto_publicado": [],
   "productos": [
     {
       "id": "prd01",

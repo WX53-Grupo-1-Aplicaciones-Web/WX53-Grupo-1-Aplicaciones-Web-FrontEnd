@@ -1,50 +1,50 @@
 <template>
-
-    <AppToolbar />
+  <AppToolbar />
   <div class="card-container" v-if="product">
-  <pv-card class="card">
-  <template #header>
-      <img alt="user header" :src="'/'+product.imagen" />
-  </template>
-  
-  <template #title><strong>{{ $t('acquisition.tittle') }}</strong></template>
-  <template #subtitle>{{ $t('acquisition.subtittle') }}</template>
-  <pv-divider layout="vertical" />
-  
-  <template #content class="information-product bordered-section">
-      <p>{{ $t('acquisition.price') }}</p>
-      <pv-input-number v-model="value1" inputId="currency-us" mode="currency" currency="USD" locale="en-US" />
-      
-      <div class="card flex justify-content-center">
-      <div class="flex flex-column gap-3">
-          <div v-for="category of categories" :key="category.key" class="flex align-items-center">
+    <pv-card class="card">
+      <template #header>
+        <img alt="user header" :src="'/'+product.imagen" />
+      </template>
+
+      <template #title><strong>{{ $t('acquisition.tittle') }}</strong></template>
+      <template #subtitle>{{ $t('acquisition.subtittle') }}</template>
+      <pv-divider layout="vertical" />
+
+      <template #content class="information-product bordered-section">
+        <p>{{ $t('acquisition.price') }}</p>
+        <pv-input-number v-model="value1" inputId="currency-us" mode="currency" currency="USD" locale="en-US" />
+
+        <div class="card flex justify-content-center">
+          <div class="flex flex-column gap-3">
+            <div v-for="category of categories" :key="category.key" class="flex align-items-center">
               <pv-checkbox v-model="selectedCategories" :inputId="category.key" name="category" :value="category.name" />
               <label :for="category.key">{{ $t('acquisition.confirm1') }}, {{ category.name }}  confirmo el acuerdo</label>
+            </div>
           </div>
-      </div>
-  </div>
-  </template>
-  <template #footer>
-      <div class="button-save">
-              <pv-button
-                  :label="'Continuar'.toUpperCase()"
-                  icon="pi pi-check"
-                  @click="validateCheckboxes"
-                  outlined
-              />
-      </div>
-    <p v-if="showCheckboxErrorMessage && selectedCategories.length < 2" class="error-message">Ambas partes deben estar de acuerdo para completar la compra</p>
-    <p v-if="showCheckboxErrorMessage && (value1 == 0 || value1 == '')" class="error-message">El precio acordado no puede ser $0.00</p>  </template>
-  </pv-card>
+        </div>
+      </template>
+      <template #footer>
+        <div class="button-save">
+          <pv-button
+            :label="'Continuar'.toUpperCase()"
+            icon="pi pi-check"
+            @click="validateCheckboxes"
+            outlined
+          />
+        </div>
+        <p v-if="showCheckboxErrorMessage && selectedCategories.length < 2" class="error-message">Ambas partes deben estar de acuerdo para completar la compra</p>
+        <p v-if="showCheckboxErrorMessage && (value1 == 0 || value1 == '')" class="error-message">El precio acordado no puede ser $0.00</p>  </template>
+    </pv-card>
 
-</div>
-<the-footer/>
+  </div>
+  <the-footer/>
 </template>
 
 <script>
 import AppToolbar from '@/components/the-application-toolbar.component.vue'
 import TheFooter from '@/components/the-footer.component.vue'
 import  {ProductCatalogService} from '@/services/the-product-on-catalog.service.js'
+import {TheProductBackendService} from '@/services/the-product-backend.service.js'
 
 export default{
   components: {
@@ -74,7 +74,8 @@ export default{
       this.$router.push('/catalog');
     },
     async getProductDetail(id) {
-      const service = new ProductCatalogService();
+      //const service = new ProductCatalogService();
+      const service = new TheProductBackendService();
       this.product = await service.getProductDetail(id);
     },
     async createBill() {

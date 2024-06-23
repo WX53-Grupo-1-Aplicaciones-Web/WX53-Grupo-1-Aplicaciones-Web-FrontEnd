@@ -1,5 +1,5 @@
 <script>
-import { ProductCatalogService } from '@/services/the-product-on-catalog.service.js'
+import { TheProductBackendService } from '@/services/the-product-backend.service.js'
 export default {
   name: 'ProductCatalog',
   data() {
@@ -8,7 +8,8 @@ export default {
     }
   },
   async created() {
-    const service = new ProductCatalogService();
+    //const service = new ProductCatalogService();
+    const service = new TheProductBackendService();
     this.products = await service.getAll();
   },
   methods: {

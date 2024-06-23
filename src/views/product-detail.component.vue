@@ -2,8 +2,7 @@
 import AppToolbar from '@/components/the-application-toolbar.component.vue'
 import SearchBar from '@/components/the-product-searching.component.vue'
 import TheFooter from '@/components/the-footer.component.vue'
-import { ProductCatalogService } from '@/services/the-product-on-catalog.service.js'
-
+import { TheProductBackendService } from '@/services/the-product-backend.service.js'
 export default {
   name: 'TheProductDetail',
 
@@ -19,7 +18,8 @@ export default {
   },
   methods: {
     async getProductDetail(id) {
-      const service = new ProductCatalogService();
+      const service = new TheProductBackendService();
+      //const service = new ProductCatalogService();
       this.product = await service.getProductDetail(id);
     },
     goToBuyProduct(productId) {
@@ -39,7 +39,7 @@ export default {
 
     <div class="product-detail-content">
       <div class="additional-images">
-        <div v-for="(image, index) in images" :key="index">
+        <div v-for="(image, index) in product.imagenesDetalle" :key="index">
           <img v-if="image" :src="image" :alt="'Imagen adicional ' + (index + 1)" class="additional-image">
         </div>
       </div>
@@ -53,16 +53,13 @@ export default {
             <img class="author-image" src="../images/craftermanProfile.png" alt="Imagen del autor">
           </div>
         </div>
-        <p class="author-description">{{product.detalles_del_artesano}}</p>
+        <p class="author-description">{{product.detallesDelArtesano}}</p>
         <div class="product-details">
           <h3>{{ $t('detail.product_detail') }}</h3>
           <ul>
-            <li>{{ product.caracteristicas[0].caracteristica_1 }}</li>
-            <li>{{ product.caracteristicas[1].caracteristica_2 }}</li>
-            <li>{{ product.caracteristicas[2].caracteristica_3 }}</li>
-            <li>{{ product.caracteristicas[3].caracteristica_4 }}</li>
-            <li>{{ product.caracteristicas[4].caracteristica_5 }}</li>
-
+            <li v-for="(caracteristica, index) in product.caracteristicas" :key="index">
+              {{ caracteristica.nombre }}: {{ caracteristica.valor }}
+            </li>
           </ul>
         </div>
       </div>

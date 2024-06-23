@@ -1,7 +1,6 @@
 <script>
 import AppToolbar from '@/components/the-application-toolbar.component.vue'
-import {ProductCatalogService} from '@/services/the-product-on-catalog.service.js'
-
+import {TheProductBackendService} from '@/services/the-product-backend.service.js'
 export default {
   name: 'TheCatalog',
   components: {
@@ -27,7 +26,8 @@ export default {
       }
     },
     async getProductDetail(id) {
-      const service = new ProductCatalogService();
+      //const service = new ProductCatalogService();
+      const service = new TheProductBackendService();
       this.product = await service.getProductDetail(id);
       this.tamanios = this.product.parametros_personalizacion['tamanio'];
     },
@@ -63,7 +63,7 @@ export default {
 
 </script>
 <template>
-    <div>
+  <div>
     <AppToolbar></AppToolbar>
     <div class="card-container">
       <pv-card class="card" v-if="product">
@@ -76,14 +76,14 @@ export default {
             <p>{{ $t('buy.subtittle') }}</p>
           </div>
           <div class="input-container">
-            <label for="color" class="input-label" >{{ Object.keys(product.parametros_personalizacion)[0] }}</label>
-            <pv-dropdown v-model="parameter" :options="product.parametros_personalizacion[Object.keys(product.parametros_personalizacion)[0]]" :placeholder="product.input_text" class="input-field" />
+            <label for="color" class="input-label" >{{ product.parametrosPersonalizacion.parametros[0].nombre }}</label>
+            <pv-dropdown v-model="parameter" :options="product.parametrosPersonalizacion.parametros[0].valores.map(v => v.valor)" :placeholder="product.inputText" class="input-field" />
           </div>
           <div class="radio-container flex flex-column gap-3">
-            <label for="tamanios" class="input-label">{{ $t('buy.size') }}</label>
-            <div v-for="tamanio in tamanios" :key="tamanio" class="flex flex-row align-items-center">
-              <pv-radio-button v-model="selectedTamanio" :inputId="tamanio" :value="tamanio" />
-              <label :for="tamanio" class="ml-2">{{ tamanio }}</label>
+            <label for="tamanios" class="input-label">{{ product.parametrosPersonalizacion.parametros[2].nombre }}</label>
+            <div v-for="tamanio in product.parametrosPersonalizacion.parametros[2].valores" :key="tamanio.valor" class="flex flex-row align-items-center">
+              <pv-radio-button v-model="selectedTamanio" :inputId="tamanio.valor" :value="tamanio.valor" />
+              <label :for="tamanio.valor" class="ml-2">{{ tamanio.valor }}</label>
             </div>
           </div>
         </template>
@@ -91,10 +91,6 @@ export default {
         </template>
       </pv-card>
 
-
-
-    <!-- Card 2 -->
-      <!-- Card 2 -->
       <pv-card class="second-card" style="width: 20%;" v-if="product">
         <template #header>
         </template>
@@ -114,27 +110,27 @@ export default {
         </template>
       </pv-card>
 
-   </div>
-
-   </div>
-
-   <pv-message class="messageinfo" severity="info">Puedes conversar con el artesano para personalizar tu producto de formas adicionales</pv-message>
-
-   <div class="message-container">
-          <div>
-            <pv-button class="chat-button" type="button" icon="" label="Manuel Herrera" @click="toggle" />
-          </div>
-          <div class="card flex justify-content-center">
-              <pv-overlay-panel ref="op" :appendTo="self">
-                  <div class="flex flex-column gap-3 w-25rem">
-                    <h2>Manuel Herrera</h2>
-                    <div class="message">Hola, ¿cómo puedo ayudarte?</div>
-                    <div class="message">Me gustaría obtener más información sobre...</div>
-                  </div>
-              </pv-overlay-panel>
-          </div>
-
     </div>
+
+  </div>
+
+  <pv-message class="messageinfo" severity="info">Puedes conversar con el artesano para personalizar tu producto de formas adicionales</pv-message>
+
+  <div class="message-container">
+    <div>
+      <pv-button class="chat-button" type="button" icon="" label="Manuel Herrera" @click="toggle" />
+    </div>
+    <div class="card flex justify-content-center">
+      <pv-overlay-panel ref="op" :appendTo="self">
+        <div class="flex flex-column gap-3 w-25rem">
+          <h2>Manuel Herrera</h2>
+          <div class="message">Hola, ¿cómo puedo ayudarte?</div>
+          <div class="message">Me gustaría obtener más información sobre...</div>
+        </div>
+      </pv-overlay-panel>
+    </div>
+
+  </div>
   <p v-if="showErrorMessage" class="error-message">Por favor, selecciona los parametros antes de comprar.</p>
 </template>
 
