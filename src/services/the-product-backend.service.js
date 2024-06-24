@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { Order } from '@/shared/models/order.entity.js';
 const http = axios.create({
   baseURL: 'http://localhost:5103/api/',
   headers: {
@@ -8,6 +8,10 @@ const http = axios.create({
 });
 
 export class TheProductBackendService {
+  currentOrder = null;
+  createOrder(id, productId, productName, orderParameters, price) {
+    this.currentOrder = new Order(id, productId, productName, orderParameters, price);
+  }
   async getAll() {
     const response = await http.get('productos');
     return response.data;

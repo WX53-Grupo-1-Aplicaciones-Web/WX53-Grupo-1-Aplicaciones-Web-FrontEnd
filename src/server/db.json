@@ -17,67 +17,38 @@
   ],
   "boletas": [
     {
-      "id": "6bd7",
-      "productId": "prd01",
+      "productId": "1",
       "product": "Mate Burilado",
-      "parameters": {},
-      "price": 50
+      "price": 12.25,
+      "id": 1
     },
     {
-      "id": "6964",
-      "productId": "prd02",
-      "product": "Miel de abeja  ",
-      "parameters": {},
-      "price": 50
-    },
-    {
-      "id": "24e5",
-      "productId": "prd02",
-      "product": "Miel de abeja  ",
-      "parameters": {},
-      "price": 20
-    },
-    {
-      "id": "e611",
-      "productId": "prd01",
+      "productId": "1",
       "product": "Mate Burilado",
-      "parameters": {},
-      "price": 45
+      "price": 7.77,
+      "id": 2
     },
     {
-      "id": "e0b4",
-      "productId": "prd01",
+      "productId": "1",
       "product": "Mate Burilado",
-      "parameters": {},
-      "price": 50
+      "price": 2.22,
+      "id": 3
     },
     {
-      "id": "1603",
-      "productId": "prd02",
-      "product": "Miel de abeja  ",
-      "parameters": {},
-      "price": 25
-    },
-    {
-      "id": "aa93",
-      "productId": "prd02",
-      "product": "Miel de abeja  ",
-      "parameters": {},
-      "price": 30
-    },
-    {
-      "productId": "prd01",
+      "productId": "1",
       "product": "Mate Burilado",
-      "parameters": {},
-      "price": 60,
-      "id": "bOrG5-9"
-    },
-    {
-      "productId": "prd01",
-      "product": "Mate Burilado",
-      "parameters": {},
-      "price": 50,
-      "id": "oWj6YFD"
+      "parameters": [
+        {
+          "paramName": "selectedTamanio",
+          "paramValue": "Grande"
+        },
+        {
+          "paramName": "parameter",
+          "paramValue": "azul"
+        }
+      ],
+      "price": 3.33,
+      "id": 4
     }
   ],
   "productos_caracteristicas": [

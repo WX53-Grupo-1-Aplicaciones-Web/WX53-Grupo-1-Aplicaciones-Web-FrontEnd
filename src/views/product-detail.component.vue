@@ -44,7 +44,7 @@ export default {
         </div>
       </div>
       <div class="product-image-section">
-        <img class="product-image" :src="'/'+product.imagen" alt="Imagen del producto">
+        <img class="product-image" :src="product.imagen" alt="Imagen del producto">
       </div>
       <div class="product-info">
         <div class="author-info">

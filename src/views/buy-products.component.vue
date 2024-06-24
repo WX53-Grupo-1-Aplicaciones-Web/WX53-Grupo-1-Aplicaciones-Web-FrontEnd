@@ -13,7 +13,7 @@ export default {
       tamanios: [],
       selectedTamanio: null,
       parameter: null,
-      parameters:{},
+      parameters:[],
       showErrorMessage: false,
     };
   },
@@ -29,27 +29,33 @@ export default {
       //const service = new ProductCatalogService();
       const service = new TheProductBackendService();
       this.product = await service.getProductDetail(id);
-      this.tamanios = this.product.parametros_personalizacion['tamanio'];
+      if (this.product && this.product.parametros_personalizacion) {
+        this.tamanios = this.product.parametros_personalizacion['tamanio'];
+      }
     },
 
     toggle(event) {
       this.$refs.op.toggle(event);
     },
     validateAndBuy(productId) {
-
       if (this.selectedTamanio === null || this.selectedTamanio === '' || this.parameter === null || this.parameter === '') {
         this.showErrorMessage = true;
       } else {
-
         this.showErrorMessage = false;
-        this.$router.push({
-          name: 'Acquisition',
-          params: {
-            id: productId,
-            selectedTamanio: this.selectedTamanio,
-            parameter: this.parameter,
-            parameters: this.parameters,
+        this.parameters = [
+          {
+            paramName: 'selectedTamanio',
+            paramValue: this.selectedTamanio
           },
+          {
+            paramName: 'parameter',
+            paramValue: this.parameter
+          }
+        ];
+        console.log('Parameters before pushing to Acquisition:', this.parameters);
+        this.$store.commit('setParameters', this.parameters);
+        this.$router.push({
+          path: `/acquisition/${productId}`,
         });
       }
     },
@@ -68,7 +74,7 @@ export default {
     <div class="card-container">
       <pv-card class="card" v-if="product">
         <template #header>
-          <img  v-if="product" alt="user header" :src="'/'+product.imagen" style="width: 300px; height: auto; margin-right: 20px;" />
+          <img  v-if="product" alt="user header" :src="product.imagen" style="width: 300px; height: auto; margin-right: 20px;" />
         </template>
         <template #title><strong>{{ $t('buy.tittle') }}</strong></template>
         <template #content>

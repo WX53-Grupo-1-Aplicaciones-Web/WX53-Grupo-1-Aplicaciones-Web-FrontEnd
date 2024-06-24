@@ -3,7 +3,7 @@
   <div class="card-container" v-if="product">
     <pv-card class="card">
       <template #header>
-        <img alt="user header" :src="'/'+product.imagen" />
+        <img alt="user header" :src="product.imagen" />
       </template>
 
       <template #title><strong>{{ $t('acquisition.tittle') }}</strong></template>
@@ -45,8 +45,10 @@ import AppToolbar from '@/components/the-application-toolbar.component.vue'
 import TheFooter from '@/components/the-footer.component.vue'
 import  {ProductCatalogService} from '@/services/the-product-on-catalog.service.js'
 import {TheProductBackendService} from '@/services/the-product-backend.service.js'
+import {TheOrderBackendService} from '@/services/the-order-backend.service.js'
 
 export default{
+
   components: {
       AppToolbar,
     TheFooter
@@ -65,7 +67,7 @@ export default{
         showCheckboxErrorMessage: false,
         selectedTamanio: null,
         parameter: null,
-        parameters:{},
+        parameters:[],
       };
   },
   methods: {
@@ -74,21 +76,20 @@ export default{
       this.$router.push('/catalog');
     },
     async getProductDetail(id) {
-      //const service = new ProductCatalogService();
       const service = new TheProductBackendService();
       this.product = await service.getProductDetail(id);
     },
-    async createBill() {
+    async createOrder() {
       const billDetails = {
         productId: this.$route.params.id,
         product: this.product.nombre,
-        parameters: this.parameters,
+        parameters: this.$store.state.parameters,
         price: this.value1,
       };
-
-      const service = new ProductCatalogService();
+      const service = new TheOrderBackendService();
+      //const service = new ProductCatalogService();
       try {
-        const response = await service.createBill(billDetails);
+        const response = await service.createOrder(billDetails);
       } catch (error) {
         console.error('Error al crear la boleta', error);
       }
@@ -99,18 +100,15 @@ export default{
         this.showCheckboxErrorMessage = true;
       } else {
         this.showCheckboxErrorMessage = false;
-        this.createBill();
+        this.createOrder();
         this.redirectToCatalog();
       }
     },
   },
   mounted() {
     this.getProductDetail(this.$route.params.id);
-    this.parameters['selectedTamanio'] = this.$route.params.selectedTamanio;
-    this.parameters['parameter'] = this.$route.params.parameter;
-    if (this.$route.params.parameters) {
-      this.parameters = this.$route.params.parameters;
-    }
+
+
   },
 }
 

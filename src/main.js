@@ -6,7 +6,8 @@ import PrimeVue from 'primevue/config'
 import 'primevue/resources/themes/aura-light-green/theme.css'
 import ConfirmationService from 'primevue/confirmationservice';
 import 'primeicons/primeicons.css'
-
+import Vuex from 'vuex';
+import store from './store.js'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Card from 'primevue/card';
@@ -43,6 +44,9 @@ app.use(router)
 app.use(ConfirmationService)
 app.use(ToastService)
 app.use(i18n)
+app.use(Vuex)
+app.use(store)
+
 app.component('pv-button', Button)
 app.component('pv-input-text', InputText)
 app.component('pv-card', Card)
