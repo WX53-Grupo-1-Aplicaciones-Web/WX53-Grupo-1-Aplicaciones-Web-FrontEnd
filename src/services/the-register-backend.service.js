@@ -7,7 +7,7 @@ const http = axios.create({
 class TheRegisterBackendService {
   async register(usuario, contraseña, correo, isArtisan) {
     try {
-      const response = await http.post('http://localhost:5103/api/clientes/register', {
+      const response = await http.post('https://artisania.azurewebsites.net/api/customers/register', {
         usuario,
         contraseña,
         correo,

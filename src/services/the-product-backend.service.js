@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Order } from '@/shared/models/order.entity.js';
 const http = axios.create({
-  baseURL: 'http://localhost:5103/api/',
+  baseURL: 'https://artisania.azurewebsites.net/api/',
   headers: {
     'Authorization': `Bearer ${localStorage.getItem('userToken')}`
   }
@@ -13,12 +13,12 @@ export class TheProductBackendService {
     this.currentOrder = new Order(id, productId, productName, orderParameters, price);
   }
   async getAll() {
-    const response = await http.get('productos');
+    const response = await http.get('products');
     return response.data;
   }
 
   async getProductDetail(id) {
-    const response = await http.get(`productos/${id}`);
+    const response = await http.get(`products/${id}`);
     return response.data;
   }
 }

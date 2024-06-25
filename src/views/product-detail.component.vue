@@ -40,7 +40,7 @@ export default {
     <div class="product-detail-content">
       <div class="additional-images">
         <div v-for="(image, index) in product.imagenesDetalle" :key="index">
-          <img v-if="image" :src="image" :alt="'Imagen adicional ' + (index + 1)" class="additional-image">
+          <img v-if="image.imagenUrl" :src="image.imagenUrl" :alt="'Imagen adicional ' + (index + 1)" class="additional-image">
         </div>
       </div>
       <div class="product-image-section">
