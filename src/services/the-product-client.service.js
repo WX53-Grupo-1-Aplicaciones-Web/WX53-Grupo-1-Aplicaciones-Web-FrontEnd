@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const http = axios.create({
-  baseURL: 'http://localhost:3000/'
+  baseURL: 'https://artisania.azurewebsites.net/api/'
 });
 
 export class ProductApiServices {
@@ -11,7 +11,7 @@ export class ProductApiServices {
 
   async publishProduct(productData) {
     try {
-      const response = await this.http.post('producto_publicado', productData);
+      const response = await this.http.post('products/create', productData);
       return response.data;
     } catch (error) {
       console.error('Error al publicar el producto:', error);
@@ -20,7 +20,7 @@ export class ProductApiServices {
   }
   async getProduct(id) {
     try {
-      const response = await this.http.get(`producto_publicado/${id}`);
+      const response = await this.http.get(`products/${id}`);
       return response.data;
     } catch (error) {
       console.error('Error getting product:', error);
