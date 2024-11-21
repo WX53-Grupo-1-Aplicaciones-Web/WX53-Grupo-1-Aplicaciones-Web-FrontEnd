@@ -1,130 +1,169 @@
 <script>
+import { mapGetters } from 'vuex'
 import AppToolbar from '@/components/the-application-toolbar.component.vue'
+
 export default {
   name: 'TheProfileInformation',
   components: {
     AppToolbar
+  },
+  computed: {
+    ...mapGetters(['user'])
+  },
+  async created() {
+    console.log('Dispatching fetchUserById action');
+    await this.$store.dispatch('fetchUserById');
+    console.log('User image URL:', this.user.imagenUsuario) // Added console log
   }
 }
 </script>
 
 <template>
-  <div class = "profile-information">
-  <AppToolbar/>
-
-    <div class = "profile-info-content">
-      <div class = "profile-picture">
-        <img src="../images/profilePicture.png" alt="Foto de perfil">
+  <AppToolbar />
+  <div class="profile-information">
+    <div class="profile-info-content">
+      <div class="profile-picture">
+        <img :src="user.imagenUsuario || 'path/to/not-found-image.png'" alt="Foto de perfil">
       </div>
-      <router-link to="/profile_edit">
-        <button class = "icon-button">
-          <img src="../images/editIcon.png" alt="Ícono">
-        </button>
-      </router-link>
-      <div class = "profile-text">
-        <h2 class="personal-info">Información personal</h2>
-        <label class="mail">Correo</label>
-        <label class="user">Usuario</label>
-        <p class="edit">Editar perfil</p>
-      </div>
-      <div class = "bars">
-        <input type="mail-bar" id="Correo" name="Correo" placeholder="david_Williams@hotmail.com"
-               style="background-color: lightblue;">
-        <input type="user-bar" id="Usuario" name="Usuario" placeholder="DavidW"
-               style="background-color: lightblue;">
+      <div class="profile-details">
+        <div class="profile-header">
+          <h2 class="personal-info">Información personal</h2>
+          <router-link to="/profile_edit" class="edit-link">
+            <button class="icon-button">
+              <img src="../images/editIcon.png" alt="Ícono">
+            </button>
+          </router-link>
+        </div>
+        <div class="profile-text">
+          <div class="info-item">
+            <label class="label">Correo:</label>
+            <div class="info-box">{{ user.email }}</div>
+          </div>
+          <div class="info-item">
+            <label class="label">Usuario:</label>
+            <div class="info-box">{{ user.username }}</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.profile-info-content {
+/* General layout */
+.profile-information {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 20px;
   padding: 20px;
 }
 
+/* Content container */
+.profile-info-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Profile picture */
 .profile-picture {
-  width: 300px;
-  height: 250px;
+  width: 150px;
+  height: 150px;
   border: 2px solid #000;
-  border-radius: 40%;
+  border-radius: 50%;
   overflow: hidden;
-  position: relative;
-  top: 80px;
-  left: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .profile-picture img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: inherit;
+  border-radius: 50%;
+}
+
+/* Profile details */
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .personal-info {
-  text-decoration: underline;
+  font-size: 1.5rem;
   font-weight: bold;
-  position: absolute;
-  top: 150px;
-  right: 650px;
+  margin: 0;
 }
 
-.mail {
-  position: absolute;
-  font-weight: bold;
-  font-size: 18px;
-  top: 250px;
-  right: 840px;
-}
-
-.user {
-  position: absolute;
-  font-weight: bold;
-  font-size: 18px;
-  top: 350px;
-  right: 833px;
-}
-
-.bars {
-  position: absolute;
-}
-
-.bars input[type="mail-bar"],
-.bars input[type="user-bar"] {
-  width: 400px;
-  height: 40px;
-  padding: 10px;
-  font-size: 18px;
-  border-radius: 5px;
-  position: absolute;
-}
-
-.bars input[type="mail-bar"] {
-  top: 180px;
-  left: 615px;
-}
-
-.bars input[type="user-bar"] {
-  top: 280px;
-  left: 615px;
+.edit-link {
+  text-decoration: none;
 }
 
 .icon-button {
-  position: absolute;
-  top: 160px;
-  left: 1000px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }
 
 .icon-button img {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 }
 
-.edit {
-  position: absolute;
-  color: #666666;
-  top: 165px;
-  right: 350px;
+/* Profile info items */
+.profile-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.label {
+  font-weight: bold;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.info-box {
+  background-color: lightblue;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 1rem;
+  flex: 1;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .profile-info-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .profile-picture {
+    margin: 0 auto;
+  }
 }
 </style>
+

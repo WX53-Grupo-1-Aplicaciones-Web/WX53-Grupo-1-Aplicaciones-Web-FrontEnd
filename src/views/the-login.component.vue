@@ -65,6 +65,8 @@ export default {
 
         if (token) {
           localStorage.setItem('userToken', token);
+          this.$store.commit('setLoggedInEmail', this.email);
+          await this.$store.dispatch('fetchUser');
           this.$router.push('/catalog');
         } else {
           this.error = 'Usuario no registrado';
