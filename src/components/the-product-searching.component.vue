@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import { ProductCatalogService } from '@/services/the-product-on-catalog.service.js';
 export default {
   name: 'SearchBar',
   computed: {
@@ -21,8 +20,6 @@ export default {
     },
     async navigateToPublication() {
       try {
-        const productService = new ProductCatalogService();
-        const response = await productService.deleteAllProducts();
         this.$router.push('/publication');
       } catch (error) {
         console.error(error);
